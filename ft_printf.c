@@ -6,7 +6,7 @@
 /*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 15:00:26 by dzboncak          #+#    #+#             */
-/*   Updated: 2019/02/26 17:29:08 by dzboncak         ###   ########.fr       */
+/*   Updated: 2019/02/26 22:10:37 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	end_printf(t_str *tmp, va_list *ap)
 	ft_strdel(&tmp->buf);
 	va_end(*ap);
 }
+
 int		ft_printf(const char * f, ...)
 {
 	va_list ap;

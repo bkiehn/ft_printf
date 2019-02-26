@@ -6,24 +6,15 @@
 /*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 20:31:56 by dzboncak          #+#    #+#             */
-/*   Updated: 2019/02/26 17:22:32 by dzboncak         ###   ########.fr       */
+/*   Updated: 2019/02/26 23:03:08 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
-
 # include "libft/libft.h"
 # include <stdarg.h>
 # include <unistd.h>
-// # define CHAR 1
-// # define STRING 2
-// # define POINTER 3
-// # define DEC 4
-// # define OCT 5
-// # define HEX 6
-// # define HEX_B 7
-// # define FLOAT 8
 
 typedef enum	e_flag
 {
@@ -42,11 +33,20 @@ typedef enum	e_length
 
 typedef union	u_data
 {
-	int				i;
-	unsigned int 	u_i;
-	unsigned char	c;
-	char			*str;
-	size_t			pointer;
+	char				c;
+	unsigned char		u_c;
+	short				s;
+	unsigned short		u_s;
+	long				l;
+	unsigned long		u_l;
+	long long			ll;
+	unsigned long long	u_ll;
+	int					i;
+	unsigned int		u_i;
+	char				*str;
+	size_t				pointer;
+	double				dbl;
+	long	double		l_dbl;
 
 }				t_data;
 
@@ -59,7 +59,11 @@ typedef struct	s_str
 typedef struct	s_p_buf
 {
 	size_t		len;
-	t_flag		flag;
+	int			f_space;
+	int			f_hash;
+	int			f_plus;
+	int			f_minus;
+	int			f_zero;
 	int			width;
 	int			precision;
 	t_length	d_length;
@@ -72,13 +76,15 @@ char			*find_type(t_p_buf *str, char *start, va_list *ap);
 void			parse_start(t_str *tmp, char **start, va_list *ap);
 void			parse_flags(t_p_buf *tmp, char **start);
 void			parse_width(t_p_buf *tmp, char **start);
-void			parse_precision(t_p_buf *tmp, char **start);
-void			parse_length(t_p_buf *tmp, char **start);
+void			parse_precision(t_p_buf *tmp, char **start, char *end);
+void			parse_length(t_p_buf *tmp, char *start, char *end);
 void			add_to_buf(t_str *tmp, char c);
 void			ft_realloc(t_str *str);
 void			ft_rejoin(t_str *tmp, char *str);
 int				ft_printf(const char *f, ...);
 char			*get_char(t_p_buf *p_str);
 int				type_char(char c, t_p_buf *p_str);
+void			init_p_str(t_p_buf *p_str);
+char			*ft_itoa_u(unsigned int n);
 
 #endif
