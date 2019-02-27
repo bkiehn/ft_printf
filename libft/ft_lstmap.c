@@ -3,30 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dzboncak <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bkiehn <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/29 22:11:44 by dzboncak          #+#    #+#             */
-/*   Updated: 2018/11/29 23:19:00 by dzboncak         ###   ########.fr       */
+/*   Created: 2018/12/01 20:43:18 by bkiehn            #+#    #+#             */
+/*   Updated: 2018/12/04 12:48:29 by bkiehn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
-t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
+t_list	*ft_lstmap(t_list *lst, t_list *(f)(t_list *elem))
 {
-	t_list	*head;
-	t_list	*current;
+	t_list	*new;
+	t_list	*snew;
+	t_list	*buf;
 
-	if (lst == NULL || f == NULL)
+	if ((lst == 0) || (f == 0))
 		return (NULL);
-	head = f(lst);
+	snew = f(lst);
+	buf = snew;
 	lst = lst->next;
-	current = head;
 	while (lst)
 	{
-		current->next = f(lst);
+		new = f(lst);
+		buf->next = new;
+		buf = new;
 		lst = lst->next;
-		current = current->next;
 	}
-	return (head);
+	return (snew);
 }

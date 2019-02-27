@@ -3,110 +3,101 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dzboncak <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bkiehn <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/27 21:14:31 by dzboncak          #+#    #+#             */
-/*   Updated: 2018/11/30 19:05:08 by dzboncak         ###   ########.fr       */
+/*   Created: 2018/11/28 21:43:38 by bkiehn            #+#    #+#             */
+/*   Updated: 2018/12/03 12:13:33 by bkiehn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdlib.h>
-#include <stdio.h>
+#include "includes/libft.h"
 
-static size_t		ft_count_words(char const *s, char c)
+static int		razmer(char const *s, char c)
 {
-	size_t			i;
-	size_t			count;
+	int		i;
+	int		k;
 
 	i = 0;
-	count = 0;
+	k = 0;
 	while (s[i] != '\0')
-	{
-		if (s[i] == c)
-			i++;
-		else
+		if (s[i] != c)
 		{
-			count += 1;
-			while (s[i] != c && s[i] != '\0')
+			while ((s[i] != '\0') && (s[i] != c))
 				i++;
+			k++;
 		}
-	}
-	return (count);
+		else
+			i++;
+	return (k + 1);
 }
 
-static char const	*ft_findnext(char const *s, char c)
+static void		zaliv(char *in, const char *of, int metka, int much)
 {
-	if (*s == c && *s != '\0')
-	{
-		while (*s == c)
-			s++;
-	}
-	else
-	{
-		while (*s != c && *s != '\0')
-			s++;
-		while (*s == c && *s != '\0')
-			s++;
-	}
-	return (s);
-}
+	int		i;
 
-static	size_t		ft_wrdlen(char const *s, char c)
-{
-	size_t			len;
-
-	len = 0;
-	while (s[len] != c && s[len] != '\0')
-		len++;
-	return (len);
-}
-
-static char			*ft_getword(char const *s, char c)
-{
-	char			*word;
-	size_t			len;
-	size_t			i;
-
-	len = ft_wrdlen(s, c);
-	word = (char*)malloc(sizeof(char) * (len + 1));
-	if (word == NULL)
-		return (NULL);
+	metka = metka - much;
 	i = 0;
-	while (i < len)
+	while (much--)
 	{
-		word[i] = s[i];
+		in[i] = *(of + metka);
+		metka++;
 		i++;
 	}
-	word[i] = '\0';
-	return (word);
+	in[i] = '\0';
 }
 
-char				**ft_strsplit(char const *s, char c)
+static	int		job(char **m, const char *s, char c, int *y)
 {
-	char			**res;
-	size_t			words;
-	size_t			i;
+	int		i;
+	int		j;
+	int		x;
 
-	if (s == NULL || c == '\0')
-		return (NULL);
-	words = ft_count_words(s, c);
 	i = 0;
-	res = (char**)malloc(sizeof(char*) * (words + 1));
-	if (res == NULL)
+	j = 0;
+	x = *y;
+	while (s[i] != '\0')
+		if (s[i] != c)
+		{
+			while ((s[i] != '\0') && (s[i] != c))
+			{
+				j++;
+				i++;
+			}
+			if (!(m[x] = (char*)malloc(sizeof(char) * (j + 1))))
+				return (0);
+			zaliv(m[x], s, i, j);
+			j = 0;
+			x++;
+		}
+		else
+			i++;
+	m[x] = 0;
+	return (1);
+}
+
+char			**ft_strsplit(char const *s, char c)
+{
+	char	**m;
+	int		size;
+	int		x;
+
+	x = 0;
+	if (s == NULL)
 		return (NULL);
-	if (words == 0)
+	size = razmer(s, c);
+	if (!(m = (char**)malloc(sizeof(char*) * size)))
+		return (NULL);
+	if (size == 1)
 	{
-		res[i] = 0;
-		return (res);
+		m[0] = 0;
+		return (m);
 	}
-	if (i == 0 && s[0] != c)
-		res[i++] = ft_getword(s, c);
-	while (i < words)
+	if (!(job(m, s, c, &x)))
 	{
-		s = ft_findnext(s, c);
-		res[i++] = ft_getword(s, c);
+		while (0 >= x)
+			free(m[x--]);
+		free(m);
+		return (NULL);
 	}
-	res[i] = 0;
-	return (res);
+	return (m);
 }

@@ -3,45 +3,62 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dzboncak <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bkiehn <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/27 19:17:18 by dzboncak          #+#    #+#             */
-/*   Updated: 2018/11/28 22:23:22 by dzboncak         ###   ########.fr       */
+/*   Created: 2018/11/30 03:11:07 by bkiehn            #+#    #+#             */
+/*   Updated: 2018/11/30 19:06:49 by bkiehn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "libft.h"
+#include "includes/libft.h"
 
-static	int	ft_isspace(char c)
+static size_t	size(char const *s, size_t *start)
 {
-	if (c == ' ' || c == '\n' || c == '\t')
-		return (1);
-	return (0);
+	size_t	i;
+	size_t	end;
+	size_t	rs;
+
+	i = 0;
+	end = 0;
+	rs = ft_strlen(s);
+	while (s[i] != 0)
+	{
+		if ((s[i] != ' ') && (s[i] != '\n') && (s[i] != '\t'))
+		{
+			*start = i;
+			break ;
+		}
+		i++;
+	}
+	while (rs--)
+		if ((s[rs] != ' ') && (s[rs] != '\n') && (s[rs] != '\t'))
+		{
+			end = rs;
+			break ;
+		}
+	return (end - *start + 2);
 }
 
-char		*ft_strtrim(char const *s)
+char			*ft_strtrim(char const *s)
 {
-	size_t	start;
-	size_t	end;
-	char	*res;
+	size_t	i;
+	size_t	j;
+	char	*a;
+	size_t	k;
 
 	if (s == NULL)
 		return (NULL);
-	if (ft_strlen(s) == 0)
-		return (ft_strnew(1));
-	start = 0;
-	while (ft_isspace(s[start]))
-	{
-		start++;
-	}
-	end = ft_strlen(s) - 1;
-	while (ft_isspace(s[end]) && end > start)
-	{
-		end--;
-	}
-	res = ft_strsub(s, start, end - start + 1);
-	if (res == NULL)
+	i = 0;
+	j = 0;
+	k = size(s, &j);
+	if ((s[j] == ' ') || (s[j] == '\n') || (s[j] == '\t'))
+		k = 1;
+	if (!(a = (char*)malloc(sizeof(char) * k)))
 		return (NULL);
-	return (res);
+	while (--k)
+	{
+		a[i++] = s[j++];
+	}
+	a[i] = '\0';
+	return (a);
 }

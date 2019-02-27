@@ -1,6 +1,4 @@
 #include "ft_printf.h"
-#include <stdio.h>
-
 
 void	test(int n, ...)
 {
@@ -18,11 +16,10 @@ void	test(int n, ...)
 
 int main()
 {
-	//ft_printf("%10c Hello man\n",'z');
-
-	int d = -1000;
+	int d = 1000;
 	char *s = "Hello";
 	double f = -50.45916;
-	printf("");
 
+	ft_printf("%23.0d\n %065.7lu", 'x');
+	//printf("ABC %23.0d\n", 123);
 }

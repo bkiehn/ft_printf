@@ -3,76 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkiehn <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/29 18:20:07 by dzboncak          #+#    #+#             */
-/*   Updated: 2019/02/19 18:27:40 by dzboncak         ###   ########.fr       */
+/*   Created: 2018/11/30 19:45:13 by bkiehn            #+#    #+#             */
+/*   Updated: 2018/11/30 21:30:10 by bkiehn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdlib.h>
+#include "includes/libft.h"
 
-static size_t	ft_calc_size(int n)
+static	int		minus(int n, int *i)
 {
-	size_t		len;
-
-	len = 1;
-	if (n < 0)
+	if (n == -2147483648)
 	{
-		len += 1;
-		n = -n;
+		*i += 2;
+		return (-(n % 1000000000));
 	}
-	while ((n = (n / 10)) > 0)
-	{
-		len++;
-	}
-	return (len);
+	else
+		*i = *i + 1;
+	return (-n);
 }
-
-static void		ft_strrev(char *str)
-{
-	size_t		len;
-	size_t		i;
-	char		c;
-
-	len = ft_strlen(str);
-	i = 0;
-	while (i < len / 2)
-	{
-		c = str[i];
-		str[i] = str[len - i - 1];
-		str[len - i - 1] = c;
-		i++;
-	}
-}
-
 
 char			*ft_itoa(int n)
 {
-	char		*res;
-	int			sign;
-	size_t		len;
-	size_t		i;
+	char	*a;
+	int		i;
+	int		buf;
 
-	if (n == -2147483648)
-		return (ft_strdup("-2147483648"));
-	if ((sign = n) < 0)
-		n = -n;
-	len = ft_calc_size(n);
-	res = (char*)malloc(sizeof(char) * (len + 1));
-	if (res == NULL)
-		return (NULL);
-	i = 0;
-	while (i < len)
-	{
-		res[i] = n % 10 + '0';
-		n /= 10;
+	i = 2;
+	if (n < 0)
+		n = minus(n, &i);
+	buf = n;
+	while ((buf = (buf / 10)) > 0)
 		i++;
-	}
-	if (sign < 0)
-		res[i++] = '-';
-	res[i] = '\0';
-	ft_strrev(res);
-	return (res);
+	if (!(a = malloc(sizeof(char) * i)))
+		return (0);
+	a[--i] = '\0';
+	a[--i] = (n % 10) + '0';
+	while ((n = (n / 10)) > 0)
+		a[--i] = (n % 10) + '0';
+	if (i == 2)
+		a[--i] = '2';
+	if (i == 1)
+		a[--i] = '-';
+	return (a);
 }

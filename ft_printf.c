@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 15:00:26 by dzboncak          #+#    #+#             */
-/*   Updated: 2019/02/26 17:29:08 by dzboncak         ###   ########.fr       */
+/*   Updated: 2019/02/26 22:29:14 by bkiehn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
 #include "ft_printf.h"
-#include <stdlib.h>
 
 #define INIT_LEN 1
 #define TO_ADD 10
@@ -52,7 +50,7 @@ void	end_printf(t_str *tmp, va_list *ap)
 	ft_strdel(&tmp->buf);
 	va_end(*ap);
 }
-int		ft_printf(const char * f, ...)
+int		ft_printf(const char *f, ...)
 {
 	va_list ap;
 	t_str	tmp;
@@ -71,6 +69,6 @@ int		ft_printf(const char * f, ...)
 		}
 		f++;
 	}
-	end_printf(&tmp, &ap);
+	//end_printf(&tmp, &ap);
 	return (tmp.len);
 }

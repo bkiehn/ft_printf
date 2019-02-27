@@ -3,37 +3,58 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dzboncak <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/21 20:46:54 by dzboncak          #+#    #+#             */
-/*   Updated: 2018/12/01 20:28:52 by dzboncak         ###   ########.fr       */
+/*   Created: 2018/11/24 19:53:05 by bkiehn            #+#    #+#             */
+/*   Updated: 2019/02/26 23:30:15 by bkiehn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
-int		ft_atoi(const char *str)
+static int	propusk(char const *str, int *n)
 {
 	int	i;
-	int sign;
-	int	res;
+	int	l;
 
+	l = 0;
 	i = 0;
-	sign = 1;
-	res = 0;
-	while (str[i] == ' ' || str[i] == '\n' || str[i] == '\t' || str[i] == '\r'
-			|| str[i] == '	' || str[i] == '\v' || str[i] == '\f')
-		i++;
-	if (str[i] == '+' || str[i] == '-')
+	while ((((str[i] >= 9) && (str[i] <= 13)) || (str[i] == 32)
+	|| (str[i] == '-') || (str[i] == '+')) && (*n == 1) &&
+	(l == 0) && (str[i] != '\0'))
 	{
 		if (str[i] == '-')
-			sign = -1;
+			*n = *n * -1;
+		if (str[i] == '+')
+			l = 1;
 		i++;
 	}
-	while (str[i] && ft_isdigit(str[i]))
+	return (i);
+}
+
+int			ft_atoi(const char *str)
+{
+	int		i;
+	int		j;
+	int		n;
+	size_t	r;
+
+	j = 0;
+	n = 1;
+	r = 0;
+	i = propusk(str, &n);
+	while ((str[i] >= '0') && (str[i] <= '9'))
 	{
-		res = res * 10 + (str[i] - '0');
+		if (r >= 922337203685477580)
+		{
+			if ((((str[i] - '0') >= 7) || (j == 19)) && (n == 1))
+				return (-1);
+			if ((((str[i] - '0') >= 8) || (j == 19)) && (n == -1))
+				return (0);
+		}
+		r = (r * 10) + (str[i] - '0');
 		i++;
+		j++;
 	}
-	return (res * sign);
+	return ((int)r * n);
 }

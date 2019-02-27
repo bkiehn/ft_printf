@@ -3,36 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dzboncak <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bkiehn <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/24 19:45:25 by dzboncak          #+#    #+#             */
-/*   Updated: 2018/11/24 19:55:58 by dzboncak         ###   ########.fr       */
+/*   Created: 2018/11/27 22:06:50 by bkiehn            #+#    #+#             */
+/*   Updated: 2018/11/29 21:30:11 by bkiehn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
-char	*ft_strstr(const char *str, const char *sub)
+char	*ft_strstr(const char *haystack, const char *needle)
 {
-	int	i;
-	int	str_i;
-	int	sub_i;
+	int		i;
+	char	*a;
+	char	*b;
 
 	i = 0;
-	if (sub[0] == '\0')
-		return ((char*)str);
-	while (str[i] != '\0')
+	a = (char*)haystack;
+	b = (char*)needle;
+	if (ft_strlen(needle) == 0)
+		return ((char*)haystack);
+	while (haystack[i] != '\0')
 	{
-		str_i = i;
-		sub_i = 0;
-		while (str[str_i] == sub[sub_i] && sub[sub_i] != '\0')
+		if (haystack[i] == needle[0])
 		{
-			str_i++;
-			sub_i++;
+			while ((*(a + i) == *b++) && (*a++ != '\0'))
+				if (*b == '\0')
+					return ((char*)haystack + i);
+			a = (char*)haystack;
+			b = (char*)needle;
 		}
-		if (sub[sub_i] == '\0' && sub_i > 0)
-			return ((char*)str + i);
 		i++;
 	}
-	return (NULL);
+	a = NULL;
+	return (a);
 }

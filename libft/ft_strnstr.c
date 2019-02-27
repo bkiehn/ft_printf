@@ -1,38 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strstr.c                                        :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dzboncak <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bkiehn <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/24 19:45:25 by dzboncak          #+#    #+#             */
-/*   Updated: 2018/11/24 20:12:53 by dzboncak         ###   ########.fr       */
+/*   Created: 2018/11/27 23:41:14 by bkiehn            #+#    #+#             */
+/*   Updated: 2018/12/02 18:40:43 by bkiehn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
-char	*ft_strnstr(const char *str, const char *sub, size_t len)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	size_t	i;
-	size_t	str_i;
-	size_t	sub_i;
+	int		i;
+	int		j;
+	int		q;
+	int		slen;
 
+	q = 0;
 	i = 0;
-	if (sub[0] == '\0')
-		return ((char*)str);
-	while ((i < len) && str[i] != '\0')
-	{
-		str_i = i;
-		sub_i = 0;
-		while (str[str_i] == sub[sub_i] && sub[sub_i] != '\0' && str_i < len)
+	if (ft_strlen(needle) == 0)
+		return ((char*)haystack);
+	while ((haystack[i] != '\0') && (len--))
+		if (haystack[i] == needle[0])
 		{
-			str_i++;
-			sub_i++;
+			slen = ++len;
+			j = i;
+			while ((haystack[j] != 0) && (haystack[j++] == needle[q++])
+			&& (slen--))
+				if (needle[q] == 0)
+					return ((char*)haystack + i);
+			q = 0;
+			i++;
 		}
-		if (sub[sub_i] == '\0' && sub_i > 0)
-			return ((char*)str + i);
-		i++;
-	}
+		else
+			i++;
 	return (NULL);
 }

@@ -3,35 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dzboncak <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bkiehn <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/24 19:21:31 by dzboncak          #+#    #+#             */
-/*   Updated: 2018/12/10 15:28:45 by dzboncak         ###   ########.fr       */
+/*   Created: 2018/11/27 20:48:02 by bkiehn            #+#    #+#             */
+/*   Updated: 2018/11/27 21:43:32 by bkiehn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 
 char	*ft_strrchr(const char *s, int c)
 {
-	int				last_occur;
-	int				i;
-	unsigned char	ch;
+	size_t	i;
+	size_t	len;
+	size_t	f;
+	char	*a;
+	int		z;
 
+	a = (char*)s;
 	i = 0;
-	ch = (unsigned char)c;
-	last_occur = -1;
-	while (s[i] != '\0')
+	f = 0;
+	z = 0;
+	len = ft_strlen(a) + 1;
+	while (len--)
 	{
-		if ((unsigned char)s[i] == ch)
-			last_occur = i;
+		if (a[i] == (char)c)
+		{
+			f = i;
+			z = 1;
+		}
 		i++;
 	}
-	if (s[i] == '\0' && c == '\0')
-	{
-		return ((char*)s + i);
-	}
-	if (last_occur == -1)
-		return (NULL);
-	return ((char*)s + last_occur);
+	if (z == 1)
+		return (a + f);
+	return (NULL);
 }
