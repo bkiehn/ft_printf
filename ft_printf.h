@@ -6,7 +6,7 @@
 /*   By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 20:31:56 by dzboncak          #+#    #+#             */
-/*   Updated: 2019/02/26 23:38:40 by bkiehn           ###   ########.fr       */
+/*   Updated: 2019/02/28 20:49:56 by bkiehn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
-// # define CHAR 1
-// # define STRING 2
-// # define POINTER 3
-// # define DEC 4
-// # define OCT 5
-// # define HEX 6
-// # define HEX_B 7
-// # define FLOAT 8
 
 typedef enum	e_flag
 {
@@ -34,7 +26,7 @@ typedef enum	e_flag
 
 typedef	enum	e_datatype
 {
-	CHAR = 1, STR, PTR, DEC, U_DEC, OCT, HEX, HEX_B, FLOAT
+	CHAR = 1, STR, DEC, PTR, U_DEC, OCT, HEX, HEX_B, FLOAT
 }				t_datatype;
 
 typedef enum	e_length
@@ -47,7 +39,7 @@ typedef union	u_data
 	long long int	i;
 	unsigned char	c;
 	char			*str;
-	double			d;
+	long double			d;
 	size_t			pointer;
 
 }				t_data;
@@ -60,13 +52,13 @@ typedef struct	s_str
 
 typedef struct	s_p_buf
 {
-	size_t		len;
 	t_flag		flag[6];
 	int			width;
 	int			precision;
 	t_length	d_length;
 	t_datatype	d_type;
 	t_data 		data;
+	size_t		len;
 	char		*f_str;
 	char		*end_find;
 }				t_p_buf;
@@ -83,5 +75,10 @@ void			ft_rejoin(t_str *tmp, char *str);
 int				ft_printf(const char *f, ...);
 char			*get_char(t_p_buf *p_str);
 int				type_char(char c, t_p_buf *p_str);
+void			numeric(t_p_buf *p_str);
+void			numeric_u(t_p_buf *p_str);
+char			*ft_itoa_long(long long int n);
+char			*ft_itoa_unlong(unsigned long long int n);
+char			*itoa_hex(long long int i);
 
 #endif

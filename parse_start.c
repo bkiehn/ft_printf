@@ -6,7 +6,7 @@
 /*   By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 18:02:33 by dzboncak          #+#    #+#             */
-/*   Updated: 2019/02/27 16:58:35 by bkiehn           ###   ########.fr       */
+/*   Updated: 2019/02/28 20:59:42 by bkiehn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,23 +72,21 @@ void	parse_precision(t_p_buf *tmp, char *start)
 	tmp->precision = -1;
 }
 
-char	*get_char(t_p_buf *p_str)
-{
-	char	*res;
-
-	res = ft_strnew(2);
-	res[0] = p_str->data.c;
-	return (res);
-}
-
 char*	get_format_str(t_p_buf *p_str)
 {
-	char	*res;
-	char	*tmp;
+	char	*str;
 
-	res = ft_strnew(p_str->len);
+	if (p_str->d_type >= 4 && p_str->d_type <= 8)
+		numeric_u(p_str);
+	else if (p_str->d_type == DEC)
+		numeric(p_str);
+	else if (p_str->d_type == STR)
+		p_str->f_str = ft_strdup(p_str->data.str);
+	// else if (p_str->f_str == CHAR)
+	// 	p_str->f_str = get_char(p_str);
 	
-	return (res);
+
+	return (str);
 }
 
 void	parse_start(t_str *tmp, char **start, va_list *ap)
@@ -109,17 +107,17 @@ void	parse_start(t_str *tmp, char **start, va_list *ap)
 	parse_precision(&p_str, *start);
 	parse_width(&p_str, *start);
 	parse_flags(&p_str, *start);
-	// fin_str = get_format_str(&p_str);
+	fin_str = get_format_str(&p_str);
 	// ft_rejoin(tmp, fin_str);
 	// ft_strdel(&fin_str);
 
-	printf("d_type = %d\nd_length = %d\nprecision = %d\nwidth = %d\n",
-	p_str.d_type, p_str.d_length, p_str.precision, p_str.width);
-	int i = 6;
-	while (i--)
-		printf("flag №%d = %d\n", i, p_str.flag[i]);
+	// printf("d_type = %d\nd_length = %d\nprecision = %d\nwidth = %d\n",
+	// p_str.d_type, p_str.d_length, p_str.precision, p_str.width);
+	// int i = 6;
+	// while (i--)
+	// 	printf("flag №%d = %d\n", i, p_str.flag[i]);
 
-	printf("\n");	
+	// printf("\n");	
 	
 	*start = end_of_param;
 }

@@ -20,6 +20,6 @@ int main()
 	char *s = "Hello";
 	double f = -50.45916;
 
-	ft_printf("%23.0d\n %065.7lu", 'x');
-	//printf("ABC %23.0d\n", 123);
+	ft_printf("%lld", 32147483647);
+	printf("printf: %d\n", 10);
 }
