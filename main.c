@@ -19,7 +19,11 @@ int main()
 	int d = 1000;
 	char *s = "Hello";
 	double f = -50.45916;
+	char	*str = "Hello";
 
-	ft_printf("%lld", 32147483647);
-	printf("printf: %d\n", 10);
+	char str3[10] = {0};
+
+	
+	//ft_printf("%.3c",'c');
+	printf("%#10.1o", 10);
 }

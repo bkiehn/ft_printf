@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_start.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 18:02:33 by dzboncak          #+#    #+#             */
-/*   Updated: 2019/02/28 20:59:42 by bkiehn           ###   ########.fr       */
+/*   Updated: 2019/02/28 22:17:37 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,10 @@ char*	get_format_str(t_p_buf *p_str)
 		numeric(p_str);
 	else if (p_str->d_type == STR)
 		p_str->f_str = ft_strdup(p_str->data.str);
-	// else if (p_str->f_str == CHAR)
-	// 	p_str->f_str = get_char(p_str);
-	
-
+	else if (p_str->d_type == CHAR)
+		p_str->f_str = get_char(p_str->data.c);
+	str = use_presicion(p_str);
+	printf("after precision %s\n",str);
 	return (str);
 }
 

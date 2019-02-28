@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 19:12:19 by dzboncak          #+#    #+#             */
-/*   Updated: 2019/02/27 16:38:28 by bkiehn           ###   ########.fr       */
+/*   Updated: 2019/02/28 22:15:25 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,36 @@ void	parse_width(t_p_buf *tmp, char *start)
 		start++;
 	}
 	tmp->width = 0;
+}
+
+char	*get_char(char c)
+{
+	char	*res;
+
+	res = ft_strnew(1);
+	res[0] = c;
+	printf("char:%s",res);
+	return (res);
+}
+
+char	*add_char(char *str, char c, int n)
+{
+	char	*tmp;
+
+	tmp = ft_strnew(ft_strlen(str) + n);
+	tmp = ft_strcpy(tmp, str);
+	ft_memset(tmp + ft_strlen(str), c, n);
+	return (tmp);
+}
+
+char	*char_add(char *str, char c, int n)
+{
+	char	*tmp;
+
+	tmp = ft_strnew(ft_strlen(str) + n);
+	ft_strcpy(tmp + n, str);
+	ft_memset(tmp, c, n);
+	return (tmp);
 }
 
 void	parse_flags(t_p_buf *tmp, char *start)
