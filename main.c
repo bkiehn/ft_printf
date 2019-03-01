@@ -19,11 +19,9 @@ int main()
 	int d = 1000;
 	char *s = "Hello";
 	double f = -50.45916;
-	char	*str = "Hello";
+	char *t;
 
-	char str3[10] = {0};
-
-	
-	//ft_printf("%.3c",'c');
-	printf("%#10.1o", 10);
+	t = (char*)malloc(sizeof(char) * 4);
+	ft_printf("%p\n", s);
+	printf("printf: %p\n", s);
 }

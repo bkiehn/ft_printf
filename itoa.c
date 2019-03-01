@@ -6,7 +6,7 @@
 /*   By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/30 19:45:13 by bkiehn            #+#    #+#             */
-/*   Updated: 2019/02/28 21:02:04 by bkiehn           ###   ########.fr       */
+/*   Updated: 2019/03/01 00:05:06 by bkiehn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,60 @@ char				*ft_itoa_unlong(unsigned long long int n)
 	return (a);
 }
 
-char				*itoa_hex(long long int i)
+int		dec_to_letter(char dec, int size)
 {
+	if (dec == 10 && size == 0)
+		return ('a');
+	else if (dec == 10)
+		return ('A');
+	else if (dec == 11 && size == 0)
+		return ('b');
+	else if (dec == 11)
+		return ('B');
+	else if (dec == 12 && size == 0)
+		return ('c');
+	else if (dec == 12)
+		return ('C');
+	else if (dec == 13 && size == 0)
+		return ('d');
+	else if (dec == 13)
+		return ('D');
+	else if (dec == 14 && size == 0)
+		return ('e');
+	else if (dec == 14)
+		return ('E');
+	else if (dec == 15 && size == 0)
+		return ('f');
+	else if (dec == 15)
+		return ('F');
 	return (0);
+}
+
+char				*itoa_hex(unsigned long long int i, int size)
+{
+	char					discharge;
+	char					*str;
+	unsigned long long int	tmp;
+	unsigned long long int	ost;
+
+	str = (char*)malloc(sizeof(char) * 2);
+	str[1] = 0;
+	ost = i;
+	while (ost > 15)
+	{
+		tmp = ost;
+		ost = tmp / 16;
+		i = tmp - (ost * 16);
+		if (i > 9)
+			discharge = dec_to_letter(i, size);
+		else
+			discharge = i % 10 + '0';
+		str = char_add(str, discharge, 1);
+	}
+	if (ost > 9 && size == 0)
+		discharge = dec_to_letter(ost, size);
+	else
+		discharge = ost % 10 + '0';
+	str = char_add(str, discharge, 1);
+	return (str);
 }
