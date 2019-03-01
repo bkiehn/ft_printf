@@ -22,6 +22,6 @@ int main()
 	char *t;
 
 	t = (char*)malloc(sizeof(char) * 4);
-	ft_printf("%p\n", s);
-	printf("printf: %p\n", s);
+	ft_printf("%10.3s", s);
+	//printf("%c dewd", '\0');
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 20:31:56 by dzboncak          #+#    #+#             */
-/*   Updated: 2019/03/01 18:04:15 by bkiehn           ###   ########.fr       */
+/*   Updated: 2019/03/01 19:45:12 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,7 @@ char			*ft_itoa_unlong(unsigned long long int n);
 char			*itoa_hex(unsigned long long int i, int size);
 char			*char_add(char *str, char c, int n);
 char			*itoa_oct(unsigned long long int i);
+char			*check_presicion(t_p_buf *p_str);
+char			*check_width(t_p_buf *p_str, char *prec_str);
 
 #endif
