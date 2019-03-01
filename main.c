@@ -16,12 +16,11 @@ void	test(int n, ...)
 
 int main()
 {
-	int d = 1000;
+	int d = 10;
 	char *s = "Hello";
 	double f = -50.45916;
 	char *t;
 
-	t = (char*)malloc(sizeof(char) * 4);
-	ft_printf("%10.3s", s);
-	//printf("%c dewd", '\0');
+	ft_printf("%+10.4llu", 110);
+	printf("%+10.4llu",110);
 }

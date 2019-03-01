@@ -6,7 +6,7 @@
 /*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 17:27:31 by dzboncak          #+#    #+#             */
-/*   Updated: 2019/03/01 19:57:19 by dzboncak         ###   ########.fr       */
+/*   Updated: 2019/03/01 23:30:31 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,79 @@
 
 char	*dec_flags(t_p_buf *p_str, char *prev_str)
 {
-	
+	char	*tmp;
+
+	tmp = prev_str;
+	if (p_str->f_str[0] != '-' && p_str->flag[PLUS] && p_str->d_type != U_DEC)
+		return (tmp = char_add(tmp,'+', 1));
+	else if (p_str->f_str[0] != '-' && !p_str->flag[MINUS] && p_str->flag[SPACE] && p_str->d_type != U_DEC)
+		return (tmp = char_add(tmp,' ', 1));
+	else if (p_str->precision == -1 && p_str->flag[NOLL] && !p_str->flag[MINUS] && p_str->d_type != U_DEC)
+	{
+		if(p_str->f_str[0] == '-')
+		{
+			tmp = neg_prec(p_str,tmp,'0',p_str->width - ft_strlen(prev_str));
+			ft_strdel(&prev_str);
+		}
+		else
+		{
+			tmp  = char_add(tmp, '0', p_str->width - ft_strlen(prev_str));
+		}
+	}
+	return (tmp);
+}
+
+char	*hex_oct_flags(t_p_buf *p_str, char *prev_str)
+{
+	char	*tmp;
+	int		diff;
+
+	tmp = prev_str;
+	diff = ft_strlen(prev_str) - p_str->precision;
+	if(p_str->d_type == HEX && p_str->flag[SHARP] && diff > 0 )
+	{
+		tmp = char_add(tmp,'x', 1);
+		tmp = char_add(tmp,'0',1);
+	}
+	else if(p_str->d_type == HEX_B && p_str->flag[SHARP] && diff > 0)
+	{
+		tmp = char_add(tmp,'X', 1);
+		tmp = char_add(tmp,'0',1);
+	}
+	else if(p_str->d_type == OCT && p_str->flag[SHARP] && diff > 0)
+	{
+		tmp = char_add(tmp,'0',1);
+	}
+	if (p_str->flag[SHARP] && p_str->flag[NOLL])
+		tmp  = char_add(tmp, '0', p_str->width - ft_strlen(prev_str) - 1);
+	return (tmp);
 }
 
 char	*use_flags(t_p_buf *p_str, char *prev_str)
 {
 	if (p_str->d_type == STR)
 		return (prev_str);
-	else if (p_str->d_type == DEC)
+	else if (p_str->d_type == DEC || p_str->d_type == U_DEC)
 		return (dec_flags(p_str, prev_str));
-	// else if (p_str->d_type >= PTR && p_str->d_type <= HEX_B)
-	// 	return (hex_oct_flags(p_str,prec_s));
-	
+	else if (p_str->d_type >= OCT && p_str->d_type <= HEX_B)
+		return (hex_oct_flags(p_str,prev_str));
 }
 
-char	*use_width(t_p_buf *p_str, char *prec_s)
+char	*use_width(t_p_buf *p_str, char *prev_s)
 {
-	int		res_len;
+	int		to_add;
 
-	res_len = p_str->width - ft_strlen(prec_s);
-	if (res_len <= 0)
-		return (prec_s);
+	to_add = p_str->width - ft_strlen(prev_s);
+	printf("to add :%d\n",to_add);
+	if (to_add <= 0)
+		return (prev_s);
 	else
 	{
-		if (p_str->d_type == STR)
-		return (char_add(prec_s,' ',res_len));
+		if(p_str->flag[MINUS])
+			return (add_char(prev_s, ' ',to_add));
+		return (char_add(prev_s, ' ',to_add));
 	}
-	return (NULL);
+	return (prev_s);
 }
 
 
