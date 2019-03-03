@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 19:12:19 by dzboncak          #+#    #+#             */
-/*   Updated: 2019/02/27 16:38:28 by bkiehn           ###   ########.fr       */
+/*   Updated: 2019/03/03 23:04:50 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,10 @@ void	parse_width(t_p_buf *tmp, char *start)
 		}
 		start++;
 	}
-	tmp->width = 0;
+	if (tmp->d_type == CHAR)
+		tmp->width = 1;
+	else 
+		tmp->width = -1;
 }
 
 void	parse_flags(t_p_buf *tmp, char *start)

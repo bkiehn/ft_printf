@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 15:00:26 by dzboncak          #+#    #+#             */
-/*   Updated: 2019/02/26 22:29:14 by bkiehn           ###   ########.fr       */
+/*   Updated: 2019/03/03 19:50:01 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,22 +53,22 @@ void	end_printf(t_str *tmp, va_list *ap)
 int		ft_printf(const char *f, ...)
 {
 	va_list ap;
-	t_str	tmp;
+	int		res;
 
 	va_start(ap, f);
-	init_vars(&tmp);
+	res = 0;
 	while (*f != '\0')
 	{
 		if(*f == '%')
 		{
-			parse_start(&tmp, (char**)&f, &ap);
+			res += parse_start((char**)&f, &ap);
 		}
 		else
 		{
-			add_to_buf(&tmp, *f);
+			ft_putchar(*f);
+			res += 1;
 		}
 		f++;
 	}
-	//end_printf(&tmp, &ap);
-	return (tmp.len);
+	return (res);
 }

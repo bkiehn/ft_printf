@@ -6,7 +6,7 @@
 /*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 20:31:56 by dzboncak          #+#    #+#             */
-/*   Updated: 2019/03/01 23:00:25 by dzboncak         ###   ########.fr       */
+/*   Updated: 2019/03/03 22:07:33 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <stdarg.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <stdio.h>
 
 typedef enum	e_flag
 {
@@ -64,7 +63,7 @@ typedef struct	s_p_buf
 }				t_p_buf;
 
 char			*find_type(t_p_buf *str, char *start, va_list *ap);
-void			parse_start(t_str *tmp, char **start, va_list *ap);
+int				parse_start(char **start, va_list *ap);
 void			parse_flags(t_p_buf *tmp, char *start);
 void			parse_width(t_p_buf *tmp, char *start);
 void			parse_precision(t_p_buf *tmp, char *start);
@@ -82,10 +81,11 @@ char			*ft_itoa_unlong(unsigned long long int n);
 char			*itoa_hex(unsigned long long int i, int size);
 char			*char_add(char *str, char c, int n);
 char			*add_char(char *str, char c, int n);
+char			*add_char2zero(char *str, char c, int n, t_p_buf *p_str);
 char			*itoa_oct(unsigned long long int i);
 char			*check_presicion(t_p_buf *p_str);
 char			*check_width(t_p_buf *p_str, char *prec_str);
-char			*neg_prec(t_p_buf *p_str, char *str, char c, int count);
+char			*sig_prec(t_p_buf *p_str,char *str, char c, int count, char sign);
 char			*neg_wid(t_p_buf *p_str, char *prev_s, char c);
 char			*hec_oct_flags(t_p_buf *p_str, char *prev_str);
 

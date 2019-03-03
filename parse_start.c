@@ -6,7 +6,7 @@
 /*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 18:02:33 by dzboncak          #+#    #+#             */
-/*   Updated: 2019/03/01 20:59:49 by dzboncak         ###   ########.fr       */
+/*   Updated: 2019/03/04 00:16:50 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ void	parse_precision(t_p_buf *tmp, char *start)
 		if (*start == '.')
 		{
 			tmp->end_find = start;
-			tmp->precision = ft_atoi(start + 1);
+			if(tmp->d_type != CHAR)
+				tmp->precision = ft_atoi(start + 1);
 			return ;
 		}
 		start++;
@@ -85,44 +86,68 @@ char*	get_format_str(t_p_buf *p_str)
 	else if (p_str->d_type == CHAR)
 		p_str->f_str = get_char(p_str->data.c);
 	str = check_presicion(p_str);
-	printf("after prec:%s\n",str);
+	// printf("after prec:%s\n",str);
 	str = check_width(p_str, str);
-	printf("after width:%s\n",str);
+	// printf("after width:%s\n",str);
 
-
-	printf("%s\n",str);
 	return (str);
 }
 
-void	parse_start(t_str *tmp, char **start, va_list *ap)
+int 	find_max(int a, int b, int c)
+{
+	if(a >= b)
+	{
+		if (a >= c)
+			return (a);
+		return (c);
+	}
+	else if (b >= a)
+	{
+		if (b >= c)
+			return (b);
+		return (c);
+	}
+	else if (c >= a)
+	{
+		if (c >= b)
+			return (c);
+		return (b);
+	}
+	return (a);
+}
+
+int		end_parse(char *fin_str, t_p_buf *p_str)
+{
+	int		i;
+	int		max;
+
+	max = find_max(ft_strlen(fin_str),p_str->precision, p_str->width);
+	i = 0;
+	if (p_str->d_type != STR)
+		while (i < max)
+		{
+			ft_putchar(fin_str[i]);
+			i++;
+		}
+	else
+		ft_putstr(fin_str);
+	
+	return (max);
+}
+
+int		parse_start(char **start, va_list *ap)
 {
 	t_p_buf p_str;
 	char	*fin_str;
 	char	*end_of_param;
 
-	if(*(*start + 1) == '%')
-	{
-		add_to_buf(tmp, '%');
-		*start += 1;
-		return ;
-	}
 	end_of_param = find_type(&p_str, *start, ap);
-	//*start += 1;
 	parse_length(&p_str, *start);
 	parse_precision(&p_str, *start);
 	parse_width(&p_str, *start);
 	parse_flags(&p_str, *start);
 	fin_str = get_format_str(&p_str);
-	// ft_rejoin(tmp, fin_str);
-	// ft_strdel(&fin_str);
 
-	// printf("d_type = %d\nd_length = %d\nprecision = %d\nwidth = %d\n",
-	// p_str.d_type, p_str.d_length, p_str.precision, p_str.width);
-	// int i = 6;
-	// while (i--)
-	// 	printf("flag №%d = %d\n", i, p_str.flag[i]);
-
-	// printf("\n");	
-	
 	*start = end_of_param;
+	return (end_parse(fin_str, &p_str));
 }

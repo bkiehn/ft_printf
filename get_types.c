@@ -6,7 +6,7 @@
 /*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 20:51:47 by dzboncak          #+#    #+#             */
-/*   Updated: 2019/03/03 18:11:46 by dzboncak         ###   ########.fr       */
+/*   Updated: 2019/03/03 23:08:16 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,11 @@ void	write_type(t_p_buf *p_str, va_list *ap)
 	|| p_str->d_type == HEX_B || p_str->d_type == U_DEC || p_str->d_type == PTR)
 		p_str->data.i = (long long int)va_arg(*ap, long long int);
 	else if (p_str->d_type == STR)
+	{
 		p_str->data.str = (char*)va_arg(*ap, char*);
+		if (p_str->data.str == NULL)
+			p_str->data.str = ft_strdup("(null)");
+	}
 	else if (p_str->d_type == CHAR)
 		p_str->data.c = (unsigned char)va_arg(*ap, int);
 	// else if (p_str->d_type == PTR)
