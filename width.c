@@ -6,7 +6,7 @@
 /*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 17:27:31 by dzboncak          #+#    #+#             */
-/*   Updated: 2019/03/01 23:30:31 by dzboncak         ###   ########.fr       */
+/*   Updated: 2019/03/03 18:47:41 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,28 +43,31 @@ char	*hex_oct_flags(t_p_buf *p_str, char *prev_str)
 
 	tmp = prev_str;
 	diff = ft_strlen(prev_str) - p_str->precision;
-	if(p_str->d_type == HEX && p_str->flag[SHARP] && diff > 0 )
+	if (p_str->flag[SHARP] && p_str->flag[NOLL] && !p_str->flag[MINUS] && p_str->precision == -1)
+	{
+			tmp  = char_add(tmp, '0', p_str->width - ft_strlen(prev_str) - 2);
+	}
+	if(p_str->d_type == HEX && p_str->flag[SHARP] && diff >= 0 )
 	{
 		tmp = char_add(tmp,'x', 1);
 		tmp = char_add(tmp,'0',1);
 	}
-	else if(p_str->d_type == HEX_B && p_str->flag[SHARP] && diff > 0)
+	else if(p_str->d_type == HEX_B && p_str->flag[SHARP] && diff >= 0)
 	{
 		tmp = char_add(tmp,'X', 1);
 		tmp = char_add(tmp,'0',1);
 	}
-	else if(p_str->d_type == OCT && p_str->flag[SHARP] && diff > 0)
+	else if(p_str->d_type == OCT && p_str->flag[SHARP] && diff >= 0)
 	{
 		tmp = char_add(tmp,'0',1);
 	}
-	if (p_str->flag[SHARP] && p_str->flag[NOLL])
-		tmp  = char_add(tmp, '0', p_str->width - ft_strlen(prev_str) - 1);
+	
 	return (tmp);
 }
 
 char	*use_flags(t_p_buf *p_str, char *prev_str)
 {
-	if (p_str->d_type == STR)
+	if (p_str->d_type == STR || p_str->d_type == CHAR)
 		return (prev_str);
 	else if (p_str->d_type == DEC || p_str->d_type == U_DEC)
 		return (dec_flags(p_str, prev_str));
@@ -75,18 +78,19 @@ char	*use_flags(t_p_buf *p_str, char *prev_str)
 char	*use_width(t_p_buf *p_str, char *prev_s)
 {
 	int		to_add;
+	char	*tmp;
 
 	to_add = p_str->width - ft_strlen(prev_s);
-	printf("to add :%d\n",to_add);
+	tmp = prev_s;
 	if (to_add <= 0)
 		return (prev_s);
 	else
 	{
 		if(p_str->flag[MINUS])
-			return (add_char(prev_s, ' ',to_add));
-		return (char_add(prev_s, ' ',to_add));
+			return (add_char(tmp, ' ',to_add));
+		return (char_add(tmp, ' ',to_add));
 	}
-	return (prev_s);
+	return (tmp);
 }
 
 
@@ -107,13 +111,8 @@ char	*check_width(t_p_buf *p_str, char *prec_s)
 	char	*tmp;
 
 	if(p_str->flag[0])
-	{
 		tmp = use_width(p_str, prec_s);
-		return (tmp);
-	}
 	else
-	{
 		tmp = use_flags_and_width(p_str, prec_s);
-		return (tmp);
-	}
+	return (tmp);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   itoa.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/30 19:45:13 by bkiehn            #+#    #+#             */
-/*   Updated: 2019/03/01 00:05:06 by bkiehn           ###   ########.fr       */
+/*   Updated: 2019/03/03 18:10:19 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ char				*itoa_hex(unsigned long long int i, int size)
 			discharge = i % 10 + '0';
 		str = char_add(str, discharge, 1);
 	}
-	if (ost > 9 && size == 0)
+	if (ost > 9)
 		discharge = dec_to_letter(ost, size);
 	else
 		discharge = ost % 10 + '0';

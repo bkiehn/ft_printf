@@ -6,7 +6,7 @@
 /*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/28 21:23:26 by dzboncak          #+#    #+#             */
-/*   Updated: 2019/03/01 23:17:44 by dzboncak         ###   ########.fr       */
+/*   Updated: 2019/03/03 18:48:49 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ char	*neg_prec(t_p_buf *p_str,char *str, char c, int count)
 
 	len = ft_strlen(p_str->f_str);
 	prec = p_str->precision;
-	if (count < 0)
-		printf("count < 0!");
 	start_ptr = ft_strsub(p_str->f_str, 1, len - 1);
 	start_ptr = char_add(start_ptr, c, count + 1);
 	start_ptr = char_add(start_ptr, '-', 1);
@@ -64,6 +62,17 @@ char	*dec_precision(t_p_buf *p_str)
 		return (ft_strdup(p_str->f_str));
 }
 
+char	*ptr_precision(t_p_buf *p_str)
+{
+	if (!p_str->flag[SHARP] || p_str->flag[NO_FLAG])
+	{
+		p_str->flag[SHARP] = 1;
+		p_str->flag[NO_FLAG] = 0;
+	}
+	p_str->d_type = HEX;
+	return (dec_precision(p_str));
+}
+
 char	*check_presicion(t_p_buf *p_str)
 {
 	char	*res;
@@ -72,10 +81,11 @@ char	*check_presicion(t_p_buf *p_str)
 		res = str_precision(p_str);
 	else if (p_str->d_type == DEC || (p_str->d_type >= U_DEC && p_str->d_type <= HEX_B))
 		res = dec_precision(p_str);
-	// else if (p_str->d_type == PTR)
-	// 	res = ptr_precision(p_str);
+	else if (p_str->d_type == CHAR)
+		res = ft_strdup(p_str->f_str);
+	else if (p_str->d_type == PTR)
+		res = ptr_precision(p_str);
 	// else if (p_str->d_type == FLOAT)
 	// 	res = float_precision(p_str);
-	
 	return (res);
 }

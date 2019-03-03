@@ -19,8 +19,8 @@ int main()
 	int d = 10;
 	char *s = "Hello";
 	double f = -50.45916;
-	char *t;
+	char c = '2';
 
-	ft_printf("%+10.4llu", 110);
-	printf("%+10.4llu",110);
+	//ft_printf("%-10c a",'\0');
+	printf("%s a","Heaa");
 }
