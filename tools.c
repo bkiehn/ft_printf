@@ -6,25 +6,11 @@
 /*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 19:12:19 by dzboncak          #+#    #+#             */
-/*   Updated: 2019/03/03 23:04:50 by dzboncak         ###   ########.fr       */
+/*   Updated: 2019/03/04 21:47:14 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-void	ft_rejoin(t_str *tmp, char *str)
-{
-	char	*temp;
-	size_t	char_count;
-	
-	char_count = ft_strlen(tmp->buf);
-	char_count += ft_strlen(str);
-	if (char_count >= tmp->len)
-		ft_realloc(tmp);
-	temp = tmp->buf;
-	tmp->buf = ft_strjoin(tmp->buf, str);
-	ft_strdel(&temp);
-}
 
 void	parse_width(t_p_buf *tmp, char *start)
 {
@@ -43,8 +29,31 @@ void	parse_width(t_p_buf *tmp, char *start)
 	}
 	if (tmp->d_type == CHAR)
 		tmp->width = 1;
-	else 
+	else
 		tmp->width = -1;
+}
+
+int		find_max(int a, int b, int c)
+{
+	if (a >= b)
+	{
+		if (a >= c)
+			return (a);
+		return (c);
+	}
+	else if (b >= a)
+	{
+		if (b >= c)
+			return (b);
+		return (c);
+	}
+	else if (c >= a)
+	{
+		if (c >= b)
+			return (c);
+		return (b);
+	}
+	return (a);
 }
 
 void	parse_flags(t_p_buf *tmp, char *start)

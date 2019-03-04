@@ -6,7 +6,7 @@
 /*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/28 23:09:42 by bkiehn            #+#    #+#             */
-/*   Updated: 2019/03/03 23:18:34 by dzboncak         ###   ########.fr       */
+/*   Updated: 2019/03/04 19:01:45 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@ char	*add_char2zero(char *str, char c, int n, t_p_buf *p_str)
 {
 	char	*tmp;
 	int		real_len;
+	t_p_buf	*unused;
 
+	unused = p_str;
 	real_len = ft_strlen(str + 1) + 1;
 	tmp = ft_strnew(real_len + n);
 	tmp = ft_memcpy(tmp,str, real_len);

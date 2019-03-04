@@ -6,7 +6,7 @@
 /*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/30 19:45:13 by bkiehn            #+#    #+#             */
-/*   Updated: 2019/03/03 18:10:19 by dzboncak         ###   ########.fr       */
+/*   Updated: 2019/03/04 19:34:28 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 long long int		minus(long long int n, long long int *i)
 {
-	if (n == -9223372036854775808)
+	if (n == -9223372036854775807 - 1)
 	{
 		*i += 2;
 		return (-(n % 1000000000000000000));
@@ -49,11 +49,11 @@ char				*ft_itoa_long(long long int n)
 	return (a);
 }
 
-char				*ft_itoa_unlong(unsigned long long int n)
+char					*ft_itoa_unlong(unsigned long long int n)
 {
-	char						*a;
-	unsigned long long int		i;
-	unsigned long long int		buf;
+	char				*a;
+	unsigned long long	i;
+	unsigned long long	buf;
 
 	i = 2;
 	buf = n;
@@ -68,7 +68,7 @@ char				*ft_itoa_unlong(unsigned long long int n)
 	return (a);
 }
 
-int		dec_to_letter(char dec, int size)
+int								dec_to_letter(char dec, int size)
 {
 	if (dec == 10 && size == 0)
 		return ('a');

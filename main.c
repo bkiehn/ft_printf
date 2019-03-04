@@ -1,14 +1,13 @@
 #include "ft_printf.h"
 #include <stdio.h>
+#include <math.h>
 
 int main()
 {
-	int d = 10;
-	char *s = "Hello";
-	double f = -50.45916;
-	char c = '2';
+	char *s = "Hello world and man";
+	int d = 25;
+	int f = 2512521;
 
-	printf("mine:%d\n",ft_printf("%-.2s is a string\n", ""));
-	printf("lib:%d\n",printf("%-.2s is a string\n", ""));
-	
+	ft_printf("%10.5D\n",f);
+	printf("%10.5D\n",f);
 }

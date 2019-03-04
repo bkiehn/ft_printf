@@ -6,50 +6,58 @@
 /*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 15:00:26 by dzboncak          #+#    #+#             */
-/*   Updated: 2019/03/03 19:50:01 by dzboncak         ###   ########.fr       */
+/*   Updated: 2019/03/04 21:45:20 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-#define INIT_LEN 1
-#define TO_ADD 10
-
-void	init_vars(t_str *s)
+int		end_parse(char *fin_str, t_p_buf *p_str)
 {
-	s->buf = ft_strnew(INIT_LEN);
-	s->len = INIT_LEN;
+	int		i;
+	int		max;
+
+	if (p_str->d_type == STR)
+		max = ft_strlen(fin_str);
+	else
+		max = find_max(ft_strlen(fin_str), p_str->precision, p_str->width);
+	i = 0;
+	if (p_str->d_type != STR)
+		while (i < max)
+		{
+			ft_putchar(fin_str[i]);
+			i++;
+		}
+	else
+		ft_putstr(fin_str);
+	ft_strdel(&fin_str);
+	if (p_str->d_type == STR && ft_strequ(p_str->data.str, "(null)"))
+	{
+		ft_strdel(&p_str->data.str);
+		ft_strdel(&p_str->f_str);
+	}
+	if (p_str->d_type != CHAR)
+		ft_strdel(&p_str->f_str);
+	return (max);
 }
 
-void	ft_realloc(t_str *str)
+int		parse_start(char **start, va_list *ap)
 {
-	char *tmp;
+	t_p_buf p_str;
+	char	*fin_str;
+	char	*end_of_param;
 
-	tmp = str->buf;
-	str->len += TO_ADD;
-	str->buf = ft_strnew(str->len);
-	ft_strcpy(str->buf, tmp);
-	ft_strdel(&tmp);
+	*start += 1;
+	end_of_param = find_type(&p_str, *start, ap);
+	parse_length(&p_str, *start);
+	parse_precision(&p_str, *start);
+	parse_width(&p_str, *start);
+	parse_flags(&p_str, *start);
+	fin_str = get_format_str(&p_str);
+	*start = end_of_param;
+	return (end_parse(fin_str, &p_str));
 }
 
-void	add_to_buf(t_str *tmp, char c)
-{
-	char	*to_del;
-	int		char_count;
-
-	char_count = ft_strlen(tmp->buf);
-	if (char_count >= tmp->len)
-		ft_realloc(tmp);
-	tmp->buf[char_count] = c;
-}
-
-void	end_printf(t_str *tmp, va_list *ap)
-{
-	tmp->len = ft_strlen(tmp->buf);
-	write(1, tmp->buf, tmp->len);
-	ft_strdel(&tmp->buf);
-	va_end(*ap);
-}
 int		ft_printf(const char *f, ...)
 {
 	va_list ap;
@@ -59,7 +67,7 @@ int		ft_printf(const char *f, ...)
 	res = 0;
 	while (*f != '\0')
 	{
-		if(*f == '%')
+		if (*f == '%')
 		{
 			res += parse_start((char**)&f, &ap);
 		}

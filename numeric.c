@@ -6,11 +6,11 @@
 /*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/27 22:01:02 by bkiehn            #+#    #+#             */
-/*   Updated: 2019/03/03 23:37:25 by dzboncak         ###   ########.fr       */
+/*   Updated: 2019/03/04 17:42:39 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "ft_printf.h"
+#include "ft_printf.h"
 
 void		numeric_u(t_p_buf *p_str)
 {
@@ -31,9 +31,9 @@ void		numeric_u(t_p_buf *p_str)
 	else if (p_str->d_type == HEX || p_str->d_type == PTR)
 		p_str->f_str = itoa_hex(i, 0);
 	else if (p_str->d_type == HEX_B)
-	 	p_str->f_str = itoa_hex(i, 1);
+		p_str->f_str = itoa_hex(i, 1);
 	else if (p_str->d_type == OCT)
-	 	p_str->f_str = itoa_oct(i);
+		p_str->f_str = itoa_oct(i);
 }
 
 void		numeric(t_p_buf *p_str)
@@ -48,5 +48,4 @@ void		numeric(t_p_buf *p_str)
 		p_str->f_str = ft_itoa_long((long int)p_str->data.i);
 	else if (p_str->d_length == ll)
 		p_str->f_str = ft_itoa_long((long long int)p_str->data.i);
-	//printf("ft_printf: %s\n", p_str->f_str);	
 }
