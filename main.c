@@ -5,9 +5,10 @@
 int main()
 {
 	char *s = "Hello world and man";
-	int d = 25;
-	int f = 2512521;
+	int i = 25;
+	int i2 = 2512521;
+	double f = 5.9999999999;
 
-	ft_printf("%10.5D\n",f);
-	printf("%10.5D\n",f);
+	ft_printf("%f\n", f);
+	printf("%f\n", f);
 }

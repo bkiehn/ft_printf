@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 20:31:56 by dzboncak          #+#    #+#             */
-/*   Updated: 2019/03/04 21:52:49 by dzboncak         ###   ########.fr       */
+/*   Updated: 2019/03/05 21:46:48 by bkiehn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@
 # include <stdarg.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdio.h>
+
+typedef enum	e_flag_f
+{
+	p2, p1r, p1b, p0, neg, dis, lc
+}				t_flag_f;
 
 typedef enum		e_flag
 {
@@ -74,7 +80,7 @@ char				*get_char(char c);
 int					type_char(char c, t_p_buf *p_str);
 void				numeric(t_p_buf *p_str);
 void				numeric_u(t_p_buf *p_str);
-char				*get_format_str(t_p_buf *p_str);
+char				*get_format_str(t_p_buf *p_str, va_list *ap);
 char				*ft_itoa_long(long long int n);
 char				*ft_itoa_unlong(unsigned long long int n);
 char				*itoa_hex(unsigned long long int i, int size);
@@ -90,5 +96,13 @@ int					find_max(int a, int b, int c);
 int					hex_oct_types(char c, t_p_buf *p_str);
 char				*neg_wid(t_p_buf *p_str, char *prev_s, char c);
 char				*hec_oct_flags(t_p_buf *p_str, char *prev_str);
+void				numeric_f(t_p_buf *p_str, va_list *ap);
+char				*ft_itoa_double(long double i, int prec);
+char				*d_to_s(long double i, t_flag_f *f, int prec, long long real);
+char				*real_f(t_flag_f *f, char *str, int lstr);
+char				*flags_f(t_flag_f *f, long double i, int prec, long long real);
+char				*drob_f(char *str2, int prec, t_flag_f *f, long double i);
+void				flags_f_p0(t_flag_f *f, long double i, int prec, long long real);
+long double			ft_pow(long long x, int y);
 
 #endif

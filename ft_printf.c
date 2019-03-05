@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 15:00:26 by dzboncak          #+#    #+#             */
-/*   Updated: 2019/03/04 21:45:20 by dzboncak         ###   ########.fr       */
+/*   Updated: 2019/03/05 21:07:31 by bkiehn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int		parse_start(char **start, va_list *ap)
 	parse_precision(&p_str, *start);
 	parse_width(&p_str, *start);
 	parse_flags(&p_str, *start);
-	fin_str = get_format_str(&p_str);
+	fin_str = get_format_str(&p_str, ap);
 	*start = end_of_param;
 	return (end_parse(fin_str, &p_str));
 }

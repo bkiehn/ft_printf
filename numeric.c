@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   numeric.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/27 22:01:02 by bkiehn            #+#    #+#             */
-/*   Updated: 2019/03/04 17:42:39 by dzboncak         ###   ########.fr       */
+/*   Updated: 2019/03/05 22:42:10 by bkiehn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@ void		numeric_u(t_p_buf *p_str)
 {
 	unsigned long long int i;
 
-	if (p_str->d_length == NO_LEN)
+	if (p_str->d_length == NO_LEN && p_str->d_type != PTR)
 		i = (unsigned int)p_str->data.i;
+	else if (p_str->d_length == ll || p_str->d_type == PTR)
+		i = (unsigned long long int)p_str->data.i;
 	else if (p_str->d_length == hh)
 		i = (unsigned char)p_str->data.i;
 	else if (p_str->d_length == h)
 		i = (unsigned short)p_str->data.i;
 	else if (p_str->d_length == l)
 		i = (unsigned long int)p_str->data.i;
-	if (p_str->d_length == ll || p_str->d_type == PTR)
-		i = (unsigned long long int)p_str->data.i;
 	if (p_str->d_type == U_DEC)
 		p_str->f_str = ft_itoa_unlong(i);
 	else if (p_str->d_type == HEX || p_str->d_type == PTR)
@@ -48,4 +48,15 @@ void		numeric(t_p_buf *p_str)
 		p_str->f_str = ft_itoa_long((long int)p_str->data.i);
 	else if (p_str->d_length == ll)
 		p_str->f_str = ft_itoa_long((long long int)p_str->data.i);
+}
+
+void		numeric_f(t_p_buf *p_str, va_list *ap)
+{
+	if (p_str->d_length == L)
+		p_str->f_str = ft_itoa_double((long double)va_arg(*ap, long double),
+		p_str->precision);
+	else
+		p_str->f_str = ft_itoa_double((double)va_arg(*ap, double),
+		p_str->precision);
+	printf("ft_printf_f: %s\n", p_str->f_str);
 }
