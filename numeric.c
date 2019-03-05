@@ -6,7 +6,7 @@
 /*   By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/27 22:01:02 by bkiehn            #+#    #+#             */
-/*   Updated: 2019/03/05 22:42:10 by bkiehn           ###   ########.fr       */
+/*   Updated: 2019/03/05 23:30:08 by bkiehn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,10 @@ void		numeric(t_p_buf *p_str)
 void		numeric_f(t_p_buf *p_str, va_list *ap)
 {
 	if (p_str->d_length == L)
+	{
 		p_str->f_str = ft_itoa_double((long double)va_arg(*ap, long double),
 		p_str->precision);
+	}
 	else
 		p_str->f_str = ft_itoa_double((double)va_arg(*ap, double),
 		p_str->precision);

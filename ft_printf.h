@@ -6,7 +6,7 @@
 /*   By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 20:31:56 by dzboncak          #+#    #+#             */
-/*   Updated: 2019/03/05 21:46:48 by bkiehn           ###   ########.fr       */
+/*   Updated: 2019/03/05 23:05:09 by bkiehn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,6 @@ char				*flags_f(t_flag_f *f, long double i, int prec, long long real);
 char				*drob_f(char *str2, int prec, t_flag_f *f, long double i);
 void				flags_f_p0(t_flag_f *f, long double i, int prec, long long real);
 long double			ft_pow(long long x, int y);
+char				*ft_itoa_ldouble(long double i, int prec);
 
 #endif

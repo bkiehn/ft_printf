@@ -7,8 +7,8 @@ int main()
 	char *s = "Hello world and man";
 	int i = 25;
 	int i2 = 2512521;
-	double f = 5.9999999999;
+	long double f = 5.123456789;
 
-	ft_printf("%f\n", f);
-	printf("%f\n", f);
+	ft_printf("%.9Lf\n", f);
+	printf("%.9Lf\n", f);
 }
