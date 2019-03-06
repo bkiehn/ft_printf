@@ -6,7 +6,7 @@
 /*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/28 21:23:26 by dzboncak          #+#    #+#             */
-/*   Updated: 2019/03/06 20:02:25 by dzboncak         ###   ########.fr       */
+/*   Updated: 2019/03/06 23:26:41 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,11 @@ char	*ptr_precision(t_p_buf *p_str)
 		p_str->flag[NO_FLAG] = 0;
 	}
 	p_str->d_type = HEX;
+	if (p_str->data.i == 0 && p_str->precision == -1)
+		p_str->flag[EXC] = 1;
 	return (dec_precision(p_str));
 }
+
 
 char	*check_presicion(t_p_buf *p_str)
 {

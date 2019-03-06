@@ -6,7 +6,7 @@
 /*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 20:51:47 by dzboncak          #+#    #+#             */
-/*   Updated: 2019/03/06 18:23:11 by dzboncak         ###   ########.fr       */
+/*   Updated: 2019/03/06 23:31:48 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int		hex_oct_types(char c, t_p_buf *p_str)
 
 int		addtnl_types(char c, t_p_buf *p_str)
 {
-	p_str->len = l;
+	p_str->d_length = l;
 	if (c == 'U')
 		return (p_str->d_type = U_DEC);
 	else if (c == 'D')
@@ -78,11 +78,17 @@ void	write_type(t_p_buf *p_str, va_list *ap)
 
 char	*find_type(t_p_buf *p_str, char *s, va_list *ap)
 {
-	while (!type_char(*s, p_str))
+	while (!type_char(*s, p_str) && *s != '\0')
 	{
 		s++;
 	}
 	p_str->end_find = s;
+	if (*s == '\0')
+	{
+		p_str->d_type = STR;
+		p_str->data.str = "\0";
+		return (s);
+	}
 	write_type(p_str, ap);
 	return (s);
 }

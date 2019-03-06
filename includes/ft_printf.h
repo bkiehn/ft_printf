@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 20:31:56 by dzboncak          #+#    #+#             */
-/*   Updated: 2019/03/06 23:12:07 by bkiehn           ###   ########.fr       */
+/*   Updated: 2019/03/06 23:27:09 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef enum	e_flag_f
 
 typedef enum		e_flag
 {
-	NO_FLAG, PLUS, MINUS, SPACE, SHARP, NOLL
+	NO_FLAG, PLUS, MINUS, SPACE, SHARP, NOLL, EXC
 }					t_flag;
 
 typedef	enum		e_datatype
@@ -58,7 +58,7 @@ typedef struct		s_str
 
 typedef struct		s_p_buf
 {
-	t_flag			flag[6];
+	t_flag			flag[7];
 	int				width;
 	int				precision;
 	t_length		d_length;

@@ -6,7 +6,7 @@
 /*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 15:00:26 by dzboncak          #+#    #+#             */
-/*   Updated: 2019/03/06 20:13:57 by dzboncak         ###   ########.fr       */
+/*   Updated: 2019/03/06 23:37:12 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int		parse_start(char **start, va_list *ap)
 	char	*end_of_param;
 
 	*start += 1;
+	p_str.d_length = NO_LEN;
 	end_of_param = find_type(&p_str, *start, ap);
 	parse_length(&p_str, *start);
 	parse_precision(&p_str, *start);

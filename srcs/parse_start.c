@@ -6,7 +6,7 @@
 /*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 18:02:33 by dzboncak          #+#    #+#             */
-/*   Updated: 2019/03/06 20:45:36 by dzboncak         ###   ########.fr       */
+/*   Updated: 2019/03/06 23:34:06 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int		parse_length(t_p_buf *tmp, char *start)
 {
 	if (tmp->d_type == CHAR || tmp->d_type == STR || tmp->d_type == PTR)
 		return (tmp->d_length = NO_LEN);
+	if (tmp->d_length != NO_LEN)
+		return (1);
 	while (start != tmp->end_find)
 	{
 		if (*start == 'h' && *(start + 1) == 'h')

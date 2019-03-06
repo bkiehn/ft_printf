@@ -6,7 +6,7 @@
 /*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 17:27:31 by dzboncak          #+#    #+#             */
-/*   Updated: 2019/03/06 20:58:34 by dzboncak         ###   ########.fr       */
+/*   Updated: 2019/03/06 23:48:23 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ char	*hex_oct_flags(t_p_buf *p_str, char *prev_str)
 	if (p_str->flag[NOLL] && !p_str->flag[MINUS] &&
 	p_str->precision == -1 && p_str->data.i != 0)
 		tmp = char_add(tmp, '0', diff_w);
-	if (p_str->d_type == HEX && p_str->flag[SHARP] &&
-	diff_p >= 0 && p_str->data.i != 0)
+	if ((p_str->d_type == HEX && p_str->flag[SHARP] &&
+	diff_p >= 0 && p_str->data.i != 0) || p_str->flag[EXC])
 	{
 		tmp = char_add(tmp, 'x', 1);
 		tmp = char_add(tmp, '0', 1);
