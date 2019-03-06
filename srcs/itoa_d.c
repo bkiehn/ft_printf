@@ -3,31 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   itoa_d.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 14:24:37 by bkiehn            #+#    #+#             */
-/*   Updated: 2019/03/06 18:15:02 by dzboncak         ###   ########.fr       */
+/*   Updated: 2019/03/06 23:15:19 by bkiehn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char			*d_to_s(long double i, t_flag_f *f, int prec, long long real)
+char			*d_to_s(long double i, t_flag_f *f, int prec)
 {
 	char	*str2;
 	char	*str;
 	int		lstr;
 
-	str = ft_itoa(i);
+	str = ft_itoa_unlong(i);
 	lstr = ft_strlen(str) - 1;
 	f[lc] = str[lstr];
 	if (prec != 0)
 	{
-		str2 = flags_f(f, i, prec, real);
+		str2 = flags_f(f, i, prec);
 		str2 = drob_f(str2, prec, f, i);
 	}
 	else
-		flags_f_p0(f, i, prec, real);
+		flags_f_p0(f, i, prec);
 	str = real_f(f, str, lstr);
 	if (f[neg] == 1)
 		str = char_add(str, '-', 1);
@@ -57,21 +57,21 @@ char			*real_f(t_flag_f *f, char *str, int lstr)
 	return (str);
 }
 
-char			*flags_f(t_flag_f *f, long double i, int p, long long r)
+char			*flags_f(t_flag_f *f, long double i, int p)
 {
 	char	*str2;
 	char	d;
 
 	str2 = ft_strnew(1);
-	if ((int)(i * ft_pow(10, p + 2) - r * ft_pow(10, p + 2)) % 10 + '0' == '0')
+	if ((U_LL)(i * ft_pow(10, p + 2)) % 10 + '0' == '0')
 		i = i + ft_pow(10, -(p + 3));
-	if ((int)(i * ft_pow(10, p + 2) - r * ft_pow(10, p + 2)) % 10 + '0' > '0')
+	if ((U_LL)(i * ft_pow(10, p + 2)) % 10 + '0' > '0')
 		f[p2] = 1;
-	if ((int)(i * ft_pow(10, p + 1) - r * ft_pow(10, p + 1)) % 10 + '0' == '5')
+	if ((U_LL)(i * ft_pow(10, p + 1)) % 10 + '0' == '5')
 		f[p1r] = 1;
-	if ((int)(i * ft_pow(10, p + 1) - r * ft_pow(10, p + 1)) % 10 + '0' > '5')
+	if ((U_LL)(i * ft_pow(10, p + 1)) % 10 + '0' > '5')
 		f[p1b] = 1;
-	if ((d = (int)(i * ft_pow(10, p) - r * ft_pow(10, p)) % 10 + '0') > '6')
+	if ((d = (U_LL)(i * ft_pow(10, p)) % 10 + '0') > '6')
 		f[p0] = 1;
 	if (f[p1b] == 1)
 		d++;
@@ -93,7 +93,7 @@ char			*drob_f(char *str2, int prec, t_flag_f *f, long double i)
 	real = i;
 	while (--prec)
 	{
-		d = (int)(i * ft_pow(10, prec) - real * ft_pow(10, prec)) % 10 + '0';
+		d = (U_LL)(i * ft_pow(10, prec)) % 10 + '0';
 		if (f[dis] == 1)
 		{
 			d++;
@@ -110,18 +110,18 @@ char			*drob_f(char *str2, int prec, t_flag_f *f, long double i)
 	return (str2);
 }
 
-void			flags_f_p0(t_flag_f *f, long double i, int p, long long r)
+void			flags_f_p0(t_flag_f *f, long double i, int p)
 {
 	char	discharge;
 
 	discharge = f[lc];
-	if ((int)(i * ft_pow(10, p + 2) - r * ft_pow(10, p + 2)) % 10 + '0' == '0')
+	if ((U_LL)(i * ft_pow(10, p + 2)) % 10 + '0' == '0')
 		i = i + ft_pow(10, -(p + 3));
-	if ((int)(i * ft_pow(10, p + 2) - r * ft_pow(10, p + 2)) % 10 + '0' > '0')
+	if ((U_LL)(i * ft_pow(10, p + 2)) % 10 + '0' > '0')
 		f[p2] = 1;
-	if ((int)(i * ft_pow(10, p + 1) - r * ft_pow(10, p + 1)) % 10 + '0' == '5')
+	if ((U_LL)(i * ft_pow(10, p + 1)) % 10 + '0' == '5')
 		f[p1r] = 1;
-	if ((int)(i * ft_pow(10, p + 1) - r * ft_pow(10, p + 1)) % 10 + '0' > '5')
+	if ((U_LL)(i * ft_pow(10, p + 1)) % 10 + '0' > '5')
 		f[p1b] = 1;
 	if (discharge > '4')
 		f[p0] = 1;

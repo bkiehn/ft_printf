@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 20:31:56 by dzboncak          #+#    #+#             */
-/*   Updated: 2019/03/06 18:24:11 by dzboncak         ###   ########.fr       */
+/*   Updated: 2019/03/06 23:12:07 by bkiehn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdarg.h>
 # include <stdlib.h>
 # include <unistd.h>
+# define U_LL unsigned long long
 
 typedef enum	e_flag_f
 {
@@ -43,7 +44,8 @@ typedef union		u_data
 	long long int	i;
 	unsigned char	c;
 	char			*str;
-	long double		d;
+	double			d;
+	long double		D;
 	size_t			pointer;
 
 }					t_data;
@@ -97,16 +99,13 @@ char				*neg_wid(t_p_buf *p_str, char *prev_s, char c);
 char				*hec_oct_flags(t_p_buf *p_str, char *prev_str);
 void				numeric_f(t_p_buf *p_str, va_list *ap);
 char				*ft_itoa_double(long double i, int prec);
-char				*d_to_s(long double i, t_flag_f *f, int prec,
-					long long real);
+char				*d_to_s(long double i, t_flag_f *f, int prec);
 char				*real_f(t_flag_f *f, char *str, int lstr);
-char				*flags_f(t_flag_f *f, long double i, int prec,
-					long long real);
+char				*flags_f(t_flag_f *f, long double i, int prec);
 char				*drob_f(char *str2, int prec, t_flag_f *f, long double i);
-void				flags_f_p0(t_flag_f *f, long double i, int prec,
-					long long real);
+void				flags_f_p0(t_flag_f *f, long double i, int prec);
 long double			ft_pow(long long x, int y);
-char				*ft_itoa_ldouble(long double i, int prec);
 char				*ft_strjoin_clean(char *s1, char *s2);
+char				*chek_special_number(double i);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   itoa2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/28 23:24:55 by bkiehn            #+#    #+#             */
-/*   Updated: 2019/03/06 18:25:51 by dzboncak         ###   ########.fr       */
+/*   Updated: 2019/03/06 23:11:29 by bkiehn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,22 +57,20 @@ long double			ft_pow(long long x, int y)
 char				*ft_itoa_double(long double i, int prec)
 {
 	char			*str;
-	long long		real;
 	t_flag_f		f[7];
 	int				j;
-
+	
 	j = 7;
 	while (j--)
 		f[j] = 0;
-	if ((real = i) < 0)
+	if (((long long)(i - 1)) < 0)
 	{
 		f[neg] = 1;
-		real = -real;
 		i = -i;
 	}
 	if (prec == -1)
 		prec = 6;
-	str = d_to_s(i, f, prec, real);
+	str = d_to_s(i, f, prec);
 	return (str);
 }
 

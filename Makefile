@@ -28,14 +28,14 @@ SOURCES = char.c \
 		  ft_printf.c\
 		  get_types.c\
 		  itoa_d.c\
-		  itoa_ld.c\
 		  itoa.c\
 		  itoa2.c\
 		  numeric.c\
 		  parse_start.c\
 		  precision.c\
 		  tools.c\
-		  width.c
+		  width.c\
+		  double_to_binary.c
 
 SRCS = $(addprefix $(DIR_S)/,$(SOURCES))
 

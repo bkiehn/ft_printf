@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   numeric.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/27 22:01:02 by bkiehn            #+#    #+#             */
-/*   Updated: 2019/03/06 18:15:25 by dzboncak         ###   ########.fr       */
+/*   Updated: 2019/03/06 21:29:22 by bkiehn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,11 @@ void		numeric_f(t_p_buf *p_str, va_list *ap)
 		p_str->precision);
 	}
 	else
-		p_str->f_str = ft_itoa_double((double)va_arg(*ap, double),
-		p_str->precision);
+	{
+		p_str->data.d = (double)va_arg(*ap, double);
+		p_str->f_str = chek_special_number(p_str->data.d);
+		if (p_str->f_str != 0)
+			return ;
+		p_str->f_str = ft_itoa_double(p_str->data.d, p_str->precision);
+	}
 }
