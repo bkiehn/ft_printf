@@ -5,34 +5,74 @@
 #                                                     +:+ +:+         +:+      #
 #    By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/02/21 16:09:38 by dzboncak          #+#    #+#              #
-#    Updated: 2019/03/04 19:47:19 by dzboncak         ###   ########.fr        #
+#    Created: 2019/03/06 20:19:04 by dzboncak          #+#    #+#              #
+#    Updated: 2019/03/06 20:19:04 by dzboncak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = ft_printf
+CC = gcc
 
-LIB_NAME = libftprintf.a
-
-LIB_DIR = ./libft
-
-SRC = $(wildcard *.c)
+NAME = libftprintf.a
 
 FLAGS = -Wall -Wextra -Werror
 
-OBJ = $(wildcard *.o)
+LIBFT = libft
 
-LIB_OBJ = libft/*.o
+DIR_S = srcs
 
-$(NAME) : $(SRC)
-	gcc  -o$(NAME) $(SRC) -L$(LIB_DIR) -lft
+DIR_O = objs
 
+HEADER = includes
 
-debug : $(SRC)
-	gcc -g3 $(SRC) -L$(LIB_DIR) -lft
+SOURCES = char.c \
+		  ft_printf.c\
+		  get_types.c\
+		  itoa_d.c\
+		  itoa_ld.c\
+		  itoa.c\
+		  itoa2.c\
+		  numeric.c\
+		  parse_start.c\
+		  precision.c\
+		  tools.c\
+		  width.c
 
-liba :
-	gcc -c $(SRC)
-	rm main.o
-	make -C $(LIB_DIR)
-	ar rc $(LIB_NAME) $(OBJ) $(LIB_OBJ)
+SRCS = $(addprefix $(DIR_S)/,$(SOURCES))
+
+OBJS = $(addprefix $(DIR_O)/,$(SOURCES:.c=.o))
+
+all: $(NAME)
+
+$(NAME): $(OBJS)
+		@make -C $(LIBFT)
+		@cp libft/libft.a ./$(NAME)
+		@ar rc $(NAME) $(OBJS)
+		@ranlib $(NAME)
+
+$(DIR_O)/%.o: $(DIR_S)/%.c
+		@mkdir -p $(DIR_O)
+		@$(CC) $(FLAGS) -I $(HEADER) -o $@ -c $<
+
+norme:
+		norminette ./libft/
+		@echo
+		norminette ./$(HEADER)/
+		@echo
+		norminette ./$(DIR_S)/
+
+clean:
+	@rm -f $(OBJS)
+	@rm -rf $(DIR_O)
+	@make clean -C $(LIBFT)
+
+fclean: clean
+	@rm -f $(NAME)
+	@make fclean -C $(LIBFT)
+
+re: fclean all
+
+test:
+	$(CC) main.c -L. -lftprintf -I./$(HEADER)
+
+debug: $(SRCS)
+	$(CC) -g3 main.c srcs/*.c -L. -lftprintf -I./$(HEADER) -o debug

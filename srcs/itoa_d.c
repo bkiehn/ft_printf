@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   itoa_d.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 14:24:37 by bkiehn            #+#    #+#             */
-/*   Updated: 2019/03/05 22:28:29 by bkiehn           ###   ########.fr       */
+/*   Updated: 2019/03/06 18:15:02 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ char			*d_to_s(long double i, t_flag_f *f, int prec, long long real)
 {
 	char	*str2;
 	char	*str;
-	char	discharge;
 	int		lstr;
 
 	str = ft_itoa(i);
@@ -29,12 +28,11 @@ char			*d_to_s(long double i, t_flag_f *f, int prec, long long real)
 	}
 	else
 		flags_f_p0(f, i, prec, real);
-	//printf("p2 = %d p1r = %d p1b = %d po = %d dis = %d p0p = %c\n", f[p2], f[p1r], f[p1b], f[p0], f[dis], f[lc]);
 	str = real_f(f, str, lstr);
 	if (f[neg] == 1)
 		str = char_add(str, '-', 1);
 	if (prec != 0)
-		str = ft_strjoin(str, str2);
+		str = ft_strjoin_clean(str, str2);
 	return (str);
 }
 

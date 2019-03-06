@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parse_start.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 18:02:33 by dzboncak          #+#    #+#             */
-/*   Updated: 2019/03/05 22:06:58 by bkiehn           ###   ########.fr       */
+/*   Updated: 2019/03/06 20:45:36 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
 
 int		parse_length(t_p_buf *tmp, char *start)
 {
@@ -63,10 +64,10 @@ char	*get_format_str(t_p_buf *p_str, va_list *ap)
 		p_str->f_str = get_char(p_str->data.c);
 	else if (p_str->d_type == FLOAT)
 		numeric_f(p_str, ap);
-	if (p_str->d_type != FLOAT)//из numeric_f str возвращается уже с точностью
+	if (p_str->d_type != FLOAT)
 		str = check_presicion(p_str);
-	// printf("prec:%s\n",str);
+	else
+		str = p_str->f_str;
 	str = check_width(p_str, str);
-		printf(":%s\n",str);
 	return (str);
 }

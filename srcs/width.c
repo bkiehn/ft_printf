@@ -6,7 +6,7 @@
 /*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 17:27:31 by dzboncak          #+#    #+#             */
-/*   Updated: 2019/03/04 21:44:24 by dzboncak         ###   ########.fr       */
+/*   Updated: 2019/03/06 20:58:34 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ char	*dec_flags(t_p_buf *p_str, char *prev_str)
 	int		diff;
 
 	tmp = prev_str;
-	if (p_str->flag[PLUS] && p_str->flag[NOLL] && (prev_str[0] != '+' && prev_str[0] != '-'))
+	if (p_str->flag[PLUS] && p_str->flag[NOLL] && (prev_str[0] != '+' && prev_str[0] != '-') && p_str->precision == -1)
 		p_str->width -= 1;
 	diff = p_str->width - ft_strlen(prev_str);
-	if (p_str->precision == -1 && p_str->flag[NOLL] && !p_str->flag[MINUS])
+	if ((p_str->precision == -1 && p_str->flag[NOLL] && !p_str->flag[MINUS]) || (p_str->d_type == FLOAT && p_str->flag[NOLL]))
 	{
 		if (p_str->width != -1 && diff > 1)
 		{
@@ -106,7 +106,7 @@ char	*use_flags(t_p_buf *p_str, char *prev_str)
 {
 	if (p_str->d_type == STR || p_str->d_type == CHAR)
 		return (prev_str);
-	else if (p_str->d_type == DEC || p_str->d_type == U_DEC)
+	else if (p_str->d_type == DEC || p_str->d_type == U_DEC || p_str->d_type == FLOAT)
 		return (dec_flags(p_str, prev_str));
 	else if (p_str->d_type >= OCT && p_str->d_type <= HEX_B)
 		return (hex_oct_flags(p_str, prev_str));

@@ -6,7 +6,7 @@
 /*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/30 19:45:13 by bkiehn            #+#    #+#             */
-/*   Updated: 2019/03/04 19:34:28 by dzboncak         ###   ########.fr       */
+/*   Updated: 2019/03/06 20:43:18 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ char				*itoa_hex(unsigned long long int i, int size)
 	unsigned long long int	tmp;
 	unsigned long long int	ost;
 
-	str = (char*)malloc(sizeof(char) * 2);
+	str = ft_strnew(1);
 	str[1] = 0;
 	ost = i;
 	while (ost > 15)

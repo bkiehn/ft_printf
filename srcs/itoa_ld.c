@@ -3,19 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   itoa_ld.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 22:46:43 by bkiehn            #+#    #+#             */
-/*   Updated: 2019/03/05 23:31:14 by bkiehn           ###   ########.fr       */
+/*   Updated: 2019/03/06 18:23:42 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char				*ft_itoa_ldouble(long double i, int prec)//тестовая фукция, нигде не используется
+char				*ft_itoa_ldouble(long double i, int prec)
 {
 	long long	real;
-	long long	tmpreal;
 	char		*str;
 
 	real = i;

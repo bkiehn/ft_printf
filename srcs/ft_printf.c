@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 15:00:26 by dzboncak          #+#    #+#             */
-/*   Updated: 2019/03/05 21:07:31 by bkiehn           ###   ########.fr       */
+/*   Updated: 2019/03/06 20:13:57 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int		end_parse(char *fin_str, t_p_buf *p_str)
 		ft_strdel(&p_str->data.str);
 		ft_strdel(&p_str->f_str);
 	}
-	if (p_str->d_type != CHAR)
+	if (p_str->d_type != CHAR && p_str->d_type != FLOAT)
 		ft_strdel(&p_str->f_str);
 	return (max);
 }
@@ -57,6 +57,7 @@ int		parse_start(char **start, va_list *ap)
 	*start = end_of_param;
 	return (end_parse(fin_str, &p_str));
 }
+
 
 int		ft_printf(const char *f, ...)
 {

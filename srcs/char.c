@@ -6,7 +6,7 @@
 /*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/28 23:09:42 by bkiehn            #+#    #+#             */
-/*   Updated: 2019/03/04 19:01:45 by dzboncak         ###   ########.fr       */
+/*   Updated: 2019/03/06 17:10:13 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ char	*add_char2zero(char *str, char c, int n, t_p_buf *p_str)
 	unused = p_str;
 	real_len = ft_strlen(str + 1) + 1;
 	tmp = ft_strnew(real_len + n);
-	tmp = ft_memcpy(tmp,str, real_len);
-	ft_memset(tmp + real_len, c ,n);
+	tmp = ft_memcpy(tmp, str, real_len);
+	ft_memset(tmp + real_len, c, n);
 	free(str);
 	return (tmp);
 }
@@ -50,7 +50,6 @@ char	*add_char2zero(char *str, char c, int n, t_p_buf *p_str)
 char	*char_add(char *str, char c, int n)
 {
 	char	*tmp;
-
 
 	tmp = ft_strnew(ft_strlen(str) + n);
 	ft_strcpy(tmp + n, str);

@@ -6,7 +6,7 @@
 /*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/28 21:23:26 by dzboncak          #+#    #+#             */
-/*   Updated: 2019/03/04 21:24:23 by dzboncak         ###   ########.fr       */
+/*   Updated: 2019/03/06 20:02:25 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ char	*ptr_precision(t_p_buf *p_str)
 
 char	*check_presicion(t_p_buf *p_str)
 {
-
-	if (p_str->flag[SHARP] &&(p_str->d_type >= DEC  && p_str->d_type <= HEX_B) &&
+	if (p_str->flag[SHARP] &&
+		(p_str->d_type >= DEC && p_str->d_type <= HEX_B) &&
 		p_str->data.i == 0 && (p_str->precision == 0 || p_str->precision == -1))
 	{
 		if ((p_str->d_type != HEX && p_str->d_type != HEX_B))
@@ -86,15 +86,14 @@ char	*check_presicion(t_p_buf *p_str)
 		else
 		{
 			if ((p_str->d_type >= OCT && p_str->d_type <= HEX_B))
-			{
 				p_str->flag[SHARP] = 0;
-			}
 			return (ft_strdup("\0"));
 		}
 	}
 	if (p_str->d_type == STR)
 		return (str_precision(p_str));
-	else if (p_str->d_type == DEC || (p_str->d_type >= U_DEC && p_str->d_type <= HEX_B))
+	else if (p_str->d_type == DEC ||
+	(p_str->d_type >= U_DEC && p_str->d_type <= HEX_B))
 		return (dec_precision(p_str));
 	else if (p_str->d_type == CHAR)
 		return (p_str->f_str);
