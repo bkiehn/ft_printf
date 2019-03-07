@@ -6,13 +6,13 @@
 /*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/30 19:45:13 by bkiehn            #+#    #+#             */
-/*   Updated: 2019/03/06 20:43:18 by dzboncak         ###   ########.fr       */
+/*   Updated: 2019/03/07 16:11:01 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-long long int		minus(long long int n, long long int *i)
+long long int			minus(long long int n, long long int *i)
 {
 	if (n == -9223372036854775807 - 1)
 	{
@@ -24,11 +24,11 @@ long long int		minus(long long int n, long long int *i)
 	return (-n);
 }
 
-char				*ft_itoa_long(long long int n)
+char					*ft_itoa_long(long long int n)
 {
-	char			*a;
-	long long int	i;
-	long long int	buf;
+	char				*a;
+	long long int		i;
+	long long int		buf;
 
 	i = 2;
 	if (n < 0)
@@ -68,7 +68,7 @@ char					*ft_itoa_unlong(unsigned long long int n)
 	return (a);
 }
 
-int								dec_to_letter(char dec, int size)
+int						dec_to_letter(char dec, int size)
 {
 	if (dec == 10 && size == 0)
 		return ('a');
@@ -97,12 +97,12 @@ int								dec_to_letter(char dec, int size)
 	return (0);
 }
 
-char				*itoa_hex(unsigned long long int i, int size)
+char					*itoa_hex(unsigned long long int i, int size)
 {
-	char					discharge;
-	char					*str;
-	unsigned long long int	tmp;
-	unsigned long long int	ost;
+	char				discharge;
+	char				*str;
+	unsigned long long	tmp;
+	unsigned long long	ost;
 
 	str = ft_strnew(1);
 	str[1] = 0;

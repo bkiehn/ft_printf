@@ -35,7 +35,8 @@ SOURCES = char.c \
 		  precision.c\
 		  tools.c\
 		  width.c\
-		  double_to_binary.c
+		  double_to_binary.c\
+		  width2.c
 
 SRCS = $(addprefix $(DIR_S)/,$(SOURCES))
 

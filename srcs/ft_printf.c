@@ -6,7 +6,7 @@
 /*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 15:00:26 by dzboncak          #+#    #+#             */
-/*   Updated: 2019/03/06 23:37:12 by dzboncak         ###   ########.fr       */
+/*   Updated: 2019/03/07 16:05:42 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ int		parse_start(char **start, va_list *ap)
 	*start = end_of_param;
 	return (end_parse(fin_str, &p_str));
 }
-
 
 int		ft_printf(const char *f, ...)
 {

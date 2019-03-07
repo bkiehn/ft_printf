@@ -6,12 +6,11 @@
 /*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 18:02:33 by dzboncak          #+#    #+#             */
-/*   Updated: 2019/03/06 23:34:06 by dzboncak         ###   ########.fr       */
+/*   Updated: 2019/03/07 16:14:51 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
 
 int		parse_length(t_p_buf *tmp, char *start)
 {

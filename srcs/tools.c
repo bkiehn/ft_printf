@@ -6,7 +6,7 @@
 /*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 19:12:19 by dzboncak          #+#    #+#             */
-/*   Updated: 2019/03/06 18:14:49 by dzboncak         ###   ########.fr       */
+/*   Updated: 2019/03/07 16:05:47 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,32 @@ int		find_max(int a, int b, int c)
 		return (b);
 	}
 	return (a);
+}
+
+int		calc_diff_w(t_p_buf *p_str, char *prev_str, int *diff_w, int *diff_p)
+{
+	int		len;
+	int		wid;
+
+	len = ft_strlen(prev_str);
+	if (p_str->width == -1)
+		wid = len;
+	else
+		wid = p_str->width;
+	*diff_p = ft_strlen(prev_str) - p_str->precision;
+	if (wid > len)
+	{
+		if (p_str->flag[NO_FLAG])
+			return (*diff_w = wid - len);
+		else if (p_str->flag[SHARP])
+		{
+			if (p_str->d_type == HEX || p_str->d_type == HEX_B)
+				return (*diff_w = wid - len - 2);
+			else if (p_str->d_length == OCT)
+				return (*diff_w = wid - len - 2);
+		}
+	}
+	return (*diff_w = wid - len);
 }
 
 void	parse_flags(t_p_buf *tmp, char *start)

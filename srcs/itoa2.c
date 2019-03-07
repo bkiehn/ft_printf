@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   itoa2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/28 23:24:55 by bkiehn            #+#    #+#             */
-/*   Updated: 2019/03/06 23:11:29 by bkiehn           ###   ########.fr       */
+/*   Updated: 2019/03/07 16:16:03 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char		*itoa_oct(unsigned long long int i)
+char					*itoa_oct(unsigned long long int i)
 {
-	char					*str;
-	unsigned long long int	tmp;
-	unsigned long long int	ost;
+	char				*str;
+	unsigned long long	tmp;
+	unsigned long long	ost;
 
 	str = ft_strnew(1);
 	ost = i;
@@ -31,7 +31,7 @@ char		*itoa_oct(unsigned long long int i)
 	return (str);
 }
 
-long double			ft_pow(long long x, int y)
+long double				ft_pow(long long x, int y)
 {
 	long double z;
 	int			f;
@@ -54,12 +54,12 @@ long double			ft_pow(long long x, int y)
 	return (z);
 }
 
-char				*ft_itoa_double(long double i, int prec)
+char					*ft_itoa_double(long double i, int prec)
 {
-	char			*str;
-	t_flag_f		f[7];
-	int				j;
-	
+	char				*str;
+	t_flag_f			f[7];
+	int					j;
+
 	j = 7;
 	while (j--)
 		f[j] = 0;
@@ -74,11 +74,11 @@ char				*ft_itoa_double(long double i, int prec)
 	return (str);
 }
 
-char	*ft_strjoin_clean(char *s1, char *s2)
+char					*ft_strjoin_clean(char *s1, char *s2)
 {
-	size_t	i;
-	char	*a;
-	size_t	j;
+	size_t				i;
+	char				*a;
+	size_t				j;
 
 	i = 0;
 	j = 0;

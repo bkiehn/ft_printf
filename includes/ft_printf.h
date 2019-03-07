@@ -6,7 +6,7 @@
 /*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 20:31:56 by dzboncak          #+#    #+#             */
-/*   Updated: 2019/03/06 23:27:09 by dzboncak         ###   ########.fr       */
+/*   Updated: 2019/03/07 16:14:14 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,13 @@ char				*add_char2zero(char *str, char c, int n, t_p_buf *p_str);
 char				*itoa_oct(unsigned long long int i);
 char				*check_presicion(t_p_buf *p_str);
 char				*check_width(t_p_buf *p_str, char *prec_str);
-char				*sig_prec(t_p_buf *p_str, char *str, char c,
-										int count, char sign);
+char				*use_width(t_p_buf *p_str, char *prev_s);
+char				*use_flags(t_p_buf *p_str, char *prev_str);
+char				*use_flags_and_width(t_p_buf *p_str, char *prec_s);
+char				*min_prec(t_p_buf *p_str, char *str, char c, int count);
+char				*plus_prec(t_p_buf *p_str, char *str, char c, int count);
+void				wid_to_sign(t_p_buf *p_str, int diff, char **tmp,
+					char *prev_str);
 int					find_max(int a, int b, int c);
 int					hex_oct_types(char c, t_p_buf *p_str);
 char				*neg_wid(t_p_buf *p_str, char *prev_s, char c);
@@ -107,5 +112,8 @@ void				flags_f_p0(t_flag_f *f, long double i, int prec);
 long double			ft_pow(long long x, int y);
 char				*ft_strjoin_clean(char *s1, char *s2);
 char				*chek_special_number(double i);
+int					calc_diff_w(t_p_buf *p_str, char *prev_str, int *diff_w,
+					int *diff_p);
+char				*exceptions_hex(t_p_buf *p_str);
 
 #endif
