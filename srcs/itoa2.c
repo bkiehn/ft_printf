@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   itoa2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bkiehn <bkiehn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/28 23:24:55 by bkiehn            #+#    #+#             */
-/*   Updated: 2019/03/07 16:16:03 by dzboncak         ###   ########.fr       */
+/*   Updated: 2019/03/07 20:32:28 by bkiehn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,15 @@ char					*ft_itoa_double(long double i, int prec)
 	char				*str;
 	t_flag_f			f[7];
 	int					j;
+	unsigned char		*tmp;
+	unsigned char		chtmp;
 
+	tmp = (unsigned char*)&i + 9;
+	chtmp = *tmp;
 	j = 7;
 	while (j--)
 		f[j] = 0;
-	if (((long long)(i - 1)) < 0)
+	if ((chtmp >> 7) == 1)
 	{
 		f[neg] = 1;
 		i = -i;
