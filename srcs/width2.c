@@ -6,7 +6,7 @@
 /*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 15:35:55 by dzboncak          #+#    #+#             */
-/*   Updated: 2019/03/07 16:15:05 by dzboncak         ###   ########.fr       */
+/*   Updated: 2019/03/07 20:28:02 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +20,27 @@ void	wid_to_sign(t_p_buf *p_str, int diff, char **tmp, char *prev_str)
 			*tmp = min_prec(p_str, *tmp, '0', diff - 1);
 		else if (prev_str[0] == '+')
 			*tmp = plus_prec(p_str, *tmp, '0', diff - 1);
+		else if (p_str->flag[SPACE] && !p_str->flag[PLUS] &&
+		prev_str[0] != '+' && prev_str[0] != '-')
+			*tmp = char_add(*tmp, '0', diff - 1);
 		else
 			*tmp = char_add(*tmp, '0', diff);
 	}
 }
 
-char	*plus_prec(t_p_buf *p_str, char *str, char c, int count)
+void	set_diff_p(t_p_buf *p_str, int *diff_p, int *wid, int *len)
 {
-	char	*start_ptr;
-	int		len;
-	int		prec;
-
-	len = ft_strlen(p_str->f_str);
-	prec = p_str->precision;
-	start_ptr = str;
-	start_ptr = ft_strsub(p_str->f_str, 1, len - 1);
-	start_ptr = char_add(start_ptr, c, count + 1);
-	start_ptr = char_add(start_ptr, '+', 1);
-	return (start_ptr);
+	if (p_str->width == -1)
+		*wid = *len;
+	else
+		*wid = p_str->width;
+	if (p_str->precision != -1)
+		*diff_p = *len - p_str->precision;
+	else if (p_str->precision == -1 && p_str->flag[SHARP]
+	&& p_str->d_type == OCT)
+		*diff_p = 1;
+	else
+		*diff_p = 0;
 }
 
 char	*min_prec(t_p_buf *p_str, char *str, char c, int count)

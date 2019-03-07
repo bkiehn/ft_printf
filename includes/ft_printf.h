@@ -6,7 +6,7 @@
 /*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 20:31:56 by dzboncak          #+#    #+#             */
-/*   Updated: 2019/03/07 16:14:14 by dzboncak         ###   ########.fr       */
+/*   Updated: 2019/03/07 20:23:59 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,5 +115,7 @@ char				*chek_special_number(double i);
 int					calc_diff_w(t_p_buf *p_str, char *prev_str, int *diff_w,
 					int *diff_p);
 char				*exceptions_hex(t_p_buf *p_str);
+void				set_diff_p(t_p_buf *p_str, int *diff_p, int *wid,
+					int *len);
 
 #endif

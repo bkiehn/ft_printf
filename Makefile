@@ -75,5 +75,5 @@ re: fclean all
 test:
 	$(CC) main.c -L. -lftprintf -I./$(HEADER)
 
-debug: $(SRCS)
+debug: libftprintf.a main.c
 	$(CC) -g3 main.c srcs/*.c -L. -lftprintf -I./$(HEADER) -o debug

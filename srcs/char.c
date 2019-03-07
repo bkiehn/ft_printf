@@ -6,7 +6,7 @@
 /*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/28 23:09:42 by bkiehn            #+#    #+#             */
-/*   Updated: 2019/03/06 17:10:13 by dzboncak         ###   ########.fr       */
+/*   Updated: 2019/03/07 20:20:20 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,21 @@ char	*add_char2zero(char *str, char c, int n, t_p_buf *p_str)
 	ft_memset(tmp + real_len, c, n);
 	free(str);
 	return (tmp);
+}
+
+char	*plus_prec(t_p_buf *p_str, char *str, char c, int count)
+{
+	char	*start_ptr;
+	int		len;
+	int		prec;
+
+	len = ft_strlen(p_str->f_str);
+	prec = p_str->precision;
+	start_ptr = str;
+	start_ptr = ft_strsub(p_str->f_str, 1, len - 1);
+	start_ptr = char_add(start_ptr, c, count + 1);
+	start_ptr = char_add(start_ptr, '+', 1);
+	return (start_ptr);
 }
 
 char	*char_add(char *str, char c, int n)

@@ -6,7 +6,7 @@
 /*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/28 21:23:26 by dzboncak          #+#    #+#             */
-/*   Updated: 2019/03/07 16:04:29 by dzboncak         ###   ########.fr       */
+/*   Updated: 2019/03/07 18:19:16 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,9 @@ char	*check_presicion(t_p_buf *p_str)
 {
 	if (p_str->flag[SHARP] &&
 		(p_str->d_type >= DEC && p_str->d_type <= HEX_B) &&
-		p_str->data.i == 0 && (p_str->precision == 0 || p_str->precision == -1))
-	{
+		p_str->data.i == 0 && (p_str->precision == 0 || p_str->precision == -1)
+		&& !p_str->flag[NOLL])
 		return (exceptions_hex(p_str));
-	}
 	if (p_str->d_type == STR)
 		return (str_precision(p_str));
 	else if (p_str->d_type == DEC ||

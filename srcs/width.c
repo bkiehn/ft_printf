@@ -6,7 +6,7 @@
 /*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 17:27:31 by dzboncak          #+#    #+#             */
-/*   Updated: 2019/03/07 16:12:46 by dzboncak         ###   ########.fr       */
+/*   Updated: 2019/03/07 20:16:41 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	*hex_oct_flags(t_p_buf *p_str, char *prev_str)
 	tmp = prev_str;
 	calc_diff_w(p_str, prev_str, &diff_w, &diff_p);
 	if (p_str->flag[NOLL] && !p_str->flag[MINUS] &&
-	p_str->precision == -1 && p_str->data.i != 0)
+	p_str->precision == -1)
 		tmp = char_add(tmp, '0', diff_w);
 	if ((p_str->d_type == HEX && p_str->flag[SHARP] &&
 	diff_p >= 0 && p_str->data.i != 0) || p_str->flag[EXC])
@@ -63,8 +63,8 @@ char	*hex_oct_flags(t_p_buf *p_str, char *prev_str)
 		tmp = char_add(tmp, 'X', 1);
 		tmp = char_add(tmp, '0', 1);
 	}
-	else if (p_str->d_type == OCT && p_str->flag[SHARP] && diff_p > 0
-	&& p_str->data.i != 0)
+	else if (p_str->d_type == OCT && p_str->flag[SHARP] &&
+	p_str->data.i != 0 && (diff_p > 0 || p_str->width == -1))
 		tmp = char_add(tmp, '0', 1);
 	return (tmp);
 }

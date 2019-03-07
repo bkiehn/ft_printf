@@ -6,7 +6,7 @@
 /*   By: dzboncak <dzboncak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 19:12:19 by dzboncak          #+#    #+#             */
-/*   Updated: 2019/03/07 16:05:47 by dzboncak         ###   ########.fr       */
+/*   Updated: 2019/03/07 20:23:06 by dzboncak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,7 @@ int		calc_diff_w(t_p_buf *p_str, char *prev_str, int *diff_w, int *diff_p)
 	int		wid;
 
 	len = ft_strlen(prev_str);
-	if (p_str->width == -1)
-		wid = len;
-	else
-		wid = p_str->width;
-	*diff_p = ft_strlen(prev_str) - p_str->precision;
+	set_diff_p(p_str, diff_p, &wid, &len);
 	if (wid > len)
 	{
 		if (p_str->flag[NO_FLAG])
@@ -75,8 +71,8 @@ int		calc_diff_w(t_p_buf *p_str, char *prev_str, int *diff_w, int *diff_p)
 		{
 			if (p_str->d_type == HEX || p_str->d_type == HEX_B)
 				return (*diff_w = wid - len - 2);
-			else if (p_str->d_length == OCT)
-				return (*diff_w = wid - len - 2);
+			else if (p_str->d_type == OCT)
+				return (*diff_w = wid - len - 1);
 		}
 	}
 	return (*diff_w = wid - len);
